@@ -17,6 +17,10 @@ Agent OS separates reusable agent behavior from any single coding harness. The s
 7. **Review is a gate.** Serious changes pass testing and security/architecture review before release.
 8. **Harness portability.** Canonical knowledge lives here; adapters translate it into each harness.
 
+## Recommended execution loop
+
+DISCOVER → RESEARCH → PLAN → IMPLEMENT → TEST → REVIEW → SECURITY GATE → RELEASE → LEARN
+
 ## Repository map
 
 - `global/` — universal operating rules and policies.
@@ -25,19 +29,19 @@ Agent OS separates reusable agent behavior from any single coding harness. The s
 - `prompts/` — reusable prompt templates.
 - `policies/` — security and permission boundaries.
 - `templates/project/` — starter structure for every new product.
-- `adapters/` — harness-specific wiring for Pi, Claude Code, Codex, and OpenCode.
+- `adapters/` — harness-specific wiring and command mappings.
 - `tools/` — tool contracts and integration notes.
-- `memory/` — guidance for structured persistent memory.
 - `checklists/` — repeatable execution gates.
-- `scripts/` — bootstrap and health-check helpers.
+- `scripts/` — bootstrap and validation helpers.
+- `docs/` — operating model, interoperability, skill specification and adoption standards.
 
-## Recommended execution loop
+## Global vs project
 
-DISCOVER → RESEARCH → PLAN → IMPLEMENT → TEST → REVIEW → SECURITY GATE → RELEASE → LEARN
+**Global:** principles, security, tool policy, evidence discipline, research methodology, generic engineering practices, and reusable skills.
 
-## Source of truth
+**Project:** buyer/user context, product rules, architecture, schema, integrations, environment, decisions, project-specific security, known bugs and roadmap.
 
-When a project is copied from this repository, project-specific documentation becomes authoritative for that project. Global policies remain the baseline unless a project explicitly tightens them.
+Start a new project from `templates/project/` and keep project-specific knowledge there.
 
 ## Harness strategy
 
@@ -47,8 +51,51 @@ When a project is copied from this repository, project-specific documentation be
 - **OpenCode** — model/provider experimentation.
 - **Gemini** — multimodal video/realtime perception where appropriate.
 
+See `docs/HARNESS-INTEROPERABILITY.md` and `adapters/COMMAND-MAP.yml` for the portable mapping.
+
+## Skill invocation
+
+Agent OS uses a canonical skill ID. Harnesses translate that ID into their own interface.
+
+Examples:
+
+```text
+/skill:planning       # Pi/native Agent Skills style
+/planning             # Claude Code style
+planning via native skill tool / Agent Skills support   # OpenCode
+Codex: load the canonical Agent Skill by ID            # Codex-compatible workflow
+```
+
+The skill itself never grants authority. Harness permissions remain the enforcement boundary.
+
+## Bootstrap
+
+The repository includes a standard-library-only validator:
+
+```bash
+python3 scripts/validate_agent_os.py
+```
+
+To install the canonical skills into a shared Agent Skills directory:
+
+```bash
+bash scripts/install-global-skill-links.sh ~/.agents/skills
+```
+
+For Claude Code, a common target is `~/.claude/skills`. For Pi, `~/.pi/agent/skills` is also supported. Check the installed harness release before adding additional automation.
+
 ## Security posture
 
-Agent OS intentionally avoids bundling a large collection of unreviewed third-party MCP servers or executable plugins. Integrations should be evaluated for provenance, permissions, data handling, maintenance, dependency risk, and prompt-injection exposure before adoption.
+Agent OS intentionally avoids bundling a large collection of unreviewed third-party MCP servers or executable plugins. Integrations are reviewed for provenance, permissions, data handling, maintenance, dependency risk, and prompt-injection exposure before adoption.
 
-Tools are capabilities, not authority. Production mutations, destructive operations, secret access, deployment and other high-impact actions should remain behind explicit authorization.
+Tools are capabilities, not authority. Production mutations, destructive operations, secret access, deployment and other high-impact actions remain approval-gated unless a project explicitly defines a safer automated boundary.
+
+## CI
+
+Every push and pull request runs `scripts/validate_agent_os.py` through GitHub Actions with read-only repository permissions.
+
+## Adding a capability
+
+Do not add a tool because it is popular. First establish necessity, provenance, permission scope, maintenance, and security evidence. Prefer an Agent OS-native skill when the durable value is instruction/knowledge rather than executable code.
+
+Record significant third-party adoption decisions in `docs/` and keep volatile provider behavior tied to current official documentation.

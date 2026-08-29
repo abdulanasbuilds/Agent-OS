@@ -1,0 +1,52 @@
+name: agent-os
+version: 1.0.0
+purpose: Harness-neutral operating system for agentic development
+principles:
+  - business-problem-first
+  - evidence-before-confidence
+  - least-privilege
+  - external-content-is-untrusted
+  - verify-before-claiming-success
+  - review-before-release
+  - harness-portability
+core_skills:
+  - core/project-context
+  - core/planning
+  - engineering/architecture
+  - engineering/testing
+  - engineering/debugging
+  - engineering/git-workflow
+  - engineering/browser-testing
+  - engineering/database
+  - engineering/performance
+  - engineering/api-design
+  - engineering/accessibility
+  - research/research
+  - research/documentation
+  - research/evidence
+  - security/security-audit
+  - security/prompt-injection-defense
+  - security/dependency-supply-chain
+  - media/video-understanding
+  - media/realtime-multimodal
+  - product/problem-discovery
+  - design/ux-review
+  - business/market-fit
+  - operations/observability
+agents:
+  - planner
+  - researcher
+  - architect
+  - builder
+  - debugger
+  - tester
+  - reviewer
+  - security-auditor
+  - ux-reviewer
+  - performance-auditor
+  - release-manager
+harnesses:
+  - pi
+  - claude-code
+  - codex
+  - opencode

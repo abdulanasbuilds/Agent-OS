@@ -1,21 +1,26 @@
 ---
 name: frontend-design
-description: Build distinctive, production-grade frontend interfaces from product context and an approved design direction, with strong hierarchy, responsive behavior, accessibility, performance, and deliberate visual choices. Use for pages, sites, dashboards, and interactive surfaces.
+description: Build distinctive, production-grade frontend interfaces from product context and an approved design direction. Use for pages, websites, web apps, dashboards, and interactive surfaces; route broad requests through design-router when the visual direction or product context is not yet settled.
 ---
 
 # Frontend Design
 
-Do not start by copying a familiar AI-generated landing-page formula.
-
 ## Before coding
-- Load the Design Brief and Design System.
-- Identify the primary user task and business goal.
+- If the request is broad or the visual direction is unresolved, load `design-router` first.
+- Read `PROJECT.md`, `DESIGN-BRIEF.md`, and `DESIGN-SYSTEM.md` when present.
+- Identify the primary user task, business goal, target audience, market context, and content hierarchy.
 - Check existing product patterns before inventing new ones.
 - Resolve framework/runtime constraints.
-- Select references only when they improve a specific design decision.
+- Select external references only when they improve a specific design decision.
 
 ## Implementation
-Build real, functioning UI. Keep content hierarchy clear, states complete, and mobile behavior intentional. Use existing component primitives where appropriate, but customize composition and styling to fit the approved direction.
+Build real, functioning UI. Keep content hierarchy clear, states complete, semantics correct, responsive behavior intentional, and the approved visual direction coherent. Use existing component primitives where appropriate, but customize composition and styling to fit the product rather than reproducing library demos.
+
+## Resource usage
+Use the Agent OS reference catalog and project reference board to locate relevant inspiration, components, assets, and fonts. Verify reuse rights and provenance before copying or shipping external assets.
+
+## Variants
+When the user asks for alternatives or the brief leaves material visual uncertainty, use `design-variants` in an isolated worktree/branch rather than repeatedly replacing the main implementation.
 
 ## Anti-slop checks
 Reject unexplained:
@@ -26,5 +31,5 @@ Reject unexplained:
 - decorative animations with no purpose
 - copied visual signatures from another brand
 
-## Quality bar
-The result should feel authored: clear point of view, coherent system, meaningful details, sensible restraint, and no visual effect that exists solely to advertise that AI made it.
+## Quality gate
+Before calling the interface complete, render it and inspect representative desktop/mobile states, interaction states, accessibility behavior, performance-sensitive effects, and the final diff. Report unresolved assumptions rather than inventing certainty.

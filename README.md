@@ -16,6 +16,8 @@ Agent OS separates reusable agent behavior from any single coding harness. The s
 8. **Verify before claiming success.** A task is not complete until relevant tests/checks have been run and the final diff has been inspected.
 9. **Review is a gate.** Serious changes pass testing and security/architecture/design review before release.
 10. **Harness portability.** Canonical knowledge lives here; adapters translate it into each harness.
+11. **Project intake before creation.** New work begins with enough context to choose the right profile, not with a blind scaffold.
+12. **Collision before write.** Existing local folders and remote repositories are never silently overwritten.
 
 ## Recommended execution loop
 
@@ -23,18 +25,46 @@ DISCOVER → INTAKE → RESEARCH → PLAN → IMPLEMENT → TEST → REVIEW → 
 
 ## Repository map
 
-- `global/` — universal operating rules, including security, tool, design, and presentation policies.
+- `global/` — universal operating rules, including security, tool, design, presentation, and project-creation policies.
 - `skills/` — reusable workflows and expertise.
 - `agents/` — specialist role instructions.
 - `prompts/` — reusable prompt templates.
 - `policies/` — security and permission boundaries.
 - `references/` — curated discovery catalogs for design and presentation sources.
 - `templates/project/` — starter structure for every new product, including design and presentation artifacts.
+- `templates/profiles/` — profile-specific briefs for products, clients, businesses, websites, and experiments.
 - `adapters/` — harness-specific wiring and command mappings.
 - `tools/` — tool contracts and integration notes.
 - `checklists/` — repeatable execution gates.
 - `scripts/` — bootstrap and validation helpers.
-- `docs/` — operating model, interoperability, resource-adoption decisions, design workflows, and presentation workflows.
+- `docs/` — operating model, lifecycle, interoperability, resource-adoption decisions, design workflows, and presentation workflows.
+
+## New work / project lifecycle
+
+Starting a project is a first-class Agent OS capability.
+
+Supported entry points include:
+
+```text
+/new-project
+/new-app
+/new-saas
+/new-business
+/new-client
+/new-website
+/new-web-app
+/new-mobile-app
+/new-experiment
+/new-prototype
+```
+
+These are aliases into the canonical `project-lifecycle` skill. The router first determines the correct profile, gathers only decision-changing context, checks for local/remote collisions, creates the correct project documentation, and then bootstraps the workspace.
+
+A business idea is not automatically converted into software. A client project is not automatically public. A website is not automatically treated as a generic SaaS landing page. The profile determines which questions, templates, skills, and safety rules apply.
+
+When the environment has an authenticated GitHub CLI, `scripts/new-project.sh` can create the local workspace, initialize Git, create the remote repository, and push the initial commit. Without authenticated remote tooling, it must report the limitation instead of claiming the repository exists.
+
+See `docs/PROJECT-LIFECYCLE.md` and `skills/project/project-lifecycle/SKILL.md`.
 
 ## Global vs project
 
@@ -68,11 +98,7 @@ Supported entry points include:
 /presentation-design
 ```
 
-These route to `presentation-router`, which determines communication purpose and business/decision context before loading narrative, visual storytelling, slide composition, assets, typography, production, and QA skills.
-
-The presentation system supports live talks, forwarded/self-read decks, pitch decks, teaching/training decks, executive reports, product/demo decks, PPTX, PDF, and HTML/web outputs.
-
-See `global/PRESENTATION-POLICY.md`, `docs/PRESENTATION-WORKFLOW.md`, `references/PRESENTATION-REFERENCE-CATALOG.yml`, and the presentation project templates.
+These route to `presentation-router`, which determines communication purpose and business/decision context before loading narrative, visual storytelling, slide composition, assets, typography, production, and QA.
 
 ## Design and presentation variants
 

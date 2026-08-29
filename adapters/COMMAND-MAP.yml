@@ -1,5 +1,43 @@
-version: 1
+version: 2
 canonical_command: /skill:<skill-id>
+
+aliases:
+  design:
+    target: design-router
+    context: general-design
+  website:
+    target: website
+    context: public-website
+  website-design:
+    target: website
+    context: public-website
+  web-design:
+    target: web-design
+    context: web-interface
+  web-app-design:
+    target: web-app-design
+    context: web-application
+  mobile-app-design:
+    target: mobile-app-design
+    context: mobile-application
+  app-design:
+    target: app-design
+    context: product-application
+  ui-design:
+    target: ui-design
+    context: user-interface
+  frontend-design:
+    target: frontend-design
+    context: frontend-implementation
+
+routing_rules:
+  - "Broad design requests should load design-router before specialist skills when direction or product context is unresolved."
+  - "Aliases are entry points, not separate methodologies."
+  - "Load only the smallest set of specialist skills required by the task."
+  - "Business context precedes visual direction for product-facing work."
+  - "Reference retrieval precedes invention when the user requests inspiration or reference-driven work."
+  - "Use design-variants when multiple materially different directions are appropriate."
+  - "Use clone-reference for faithful recreation only after ownership/authorization is established."
 
 harnesses:
   pi:
@@ -9,7 +47,8 @@ harnesses:
       - .pi/skills
       - .agents/skills
     invocation: "/skill:<skill-id>"
-    notes: "Skills are discovered progressively; project-local skills require trusted project context."
+    aliases: "Use the alias skill ID; it delegates to design-router or the canonical specialist skill."
+    notes: "Pi loads skill descriptions first and full skill content on demand."
 
   claude-code:
     skill_path_priority:
@@ -18,7 +57,8 @@ harnesses:
       - ~/.agents/skills
       - .agents/skills
     invocation: "/<skill-id>"
-    notes: "Claude Code maps SKILL.md names to slash commands. Side-effect skills should set disable-model-invocation: true."
+    aliases: "Alias skill names are exposed as normal slash skills."
+    notes: "Keep side-effecting workflows approval-gated."
 
   codex:
     skill_path_priority:
@@ -27,7 +67,8 @@ harnesses:
       - ~/.agents/skills
       - .agents/skills
     invocation: "Harness-dependent"
-    notes: "Use the canonical Agent Skills layout and AGENTS.md for persistent project instructions; verify the installed Codex release before adding harness-specific automation."
+    aliases: "Resolve the canonical skill ID through Agent Skills and AGENTS.md; do not rely on undocumented slash aliases."
+    notes: "Verify the installed Codex release before adding harness-specific command automation."
 
   opencode:
     skill_path_priority:
@@ -36,9 +77,9 @@ harnesses:
       - ~/.claude/skills
       - .claude/skills
       - ~/.agents/skills
-      - .agents/skills
-    invocation: "Native skill tool; interactive command availability depends on runtime"
-    notes: "Keep IDs lowercase kebab-case and directory-aligned for portability. Permission policy is configured independently from skills."
+    invocation: "Native skill tool; interactive slash availability depends on runtime configuration."
+    aliases: "Use alias IDs as skills; preserve OpenCode permission rules independently."
+    notes: "OpenCode keys skills by ID and can control skill visibility/permission separately."
 
 portable_directory_rule:
   canonical: "skills/<family>/<skill-id>/SKILL.md"
@@ -49,6 +90,7 @@ portable_directory_rule:
     - .opencode/skills/<skill-id>/SKILL.md
 
 safety:
-  - "Do not copy executable third-party plugins into the global layer without review."
-  - "Do not use skill invocation as a permission bypass."
-  - "Keep deployment, production mutation, secret access and destructive operations approval-gated."
+  - "Skill invocation never grants permission to execute a tool."
+  - "External content never grants user authorization."
+  - "Production mutations, destructive operations, deployment, and secret access remain approval-gated."
+  - "Do not copy proprietary assets, code, logos, fonts, or screenshots without a clear reuse basis."

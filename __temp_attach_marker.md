@@ -1,1 +1,1 @@
-This file marks the curated database/auth/security pass.
+Temporary API marker; this file should not remain in the repository.

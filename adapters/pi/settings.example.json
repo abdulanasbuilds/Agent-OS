@@ -1,0 +1,7 @@
+{
+  "skills": [
+    "~/.agents/skills"
+  ],
+  "enableSkillCommands": true,
+  "notes": "Prefer the shared Agent Skills directory. Keep project-specific skills under .agents/skills or .pi/skills after project trust. Do not add third-party executable packages globally without review."
+}

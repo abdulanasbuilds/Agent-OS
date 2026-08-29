@@ -10,10 +10,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-
 ERRORS: list[str] = []
 WARNINGS: list[str] = []
-
 NAME_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 SECRET_PATTERNS = [
     re.compile(r"\bsk-[A-Za-z0-9]{16,}\b"),
@@ -21,33 +19,17 @@ SECRET_PATTERNS = [
     re.compile(r"\bAIza[A-Za-z0-9_-]{30,}\b"),
     re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
 ]
-
 REQUIRED_FILES = [
-    "README.md",
-    "LICENSE",
-    "MANIFEST.yml",
-    "global/AGENTS.md",
-    "global/SECURITY.md",
-    "global/TOOL-POLICY.md",
-    "global/EVIDENCE-POLICY.md",
-    "global/MEMORY-POLICY.md",
-    "global/MODEL-ROUTING.md",
-    "global/SKILL-ROUTING.md",
-    "docs/SKILL-SPEC.md",
-    "docs/HARNESS-INTEROPERABILITY.md",
-    "docs/SECURITY-AND-ADOPTION.md",
-    "adapters/COMMAND-MAP.yml",
+    "README.md", "LICENSE", "MANIFEST.yml", "global/AGENTS.md",
+    "global/SECURITY.md", "global/TOOL-POLICY.md", "global/EVIDENCE-POLICY.md",
+    "global/MEMORY-POLICY.md", "global/MODEL-ROUTING.md", "global/SKILL-ROUTING.md",
+    "docs/SKILL-SPEC.md", "docs/HARNESS-INTEROPERABILITY.md",
+    "docs/SECURITY-AND-ADOPTION.md", "adapters/COMMAND-MAP.yml",
 ]
 
 
 def fail(message: str) -> None:
     ERRORS.append(message)
-
-
-def check_required_files() -> None:
-    for rel in REQUIRED_FILES:
-        if not (ROOT / rel).is_file():
-            fail(f"missing required file: {rel}")
 
 
 def parse_frontmatter(text: str) -> dict[str, str]:
@@ -62,6 +44,12 @@ def parse_frontmatter(text: str) -> dict[str, str]:
             key, value = line.split(":", 1)
             result[key.strip()] = value.strip().strip("\"'")
     return result
+
+
+def check_required_files() -> None:
+    for rel in REQUIRED_FILES:
+        if not (ROOT / rel).is_file():
+            fail(f"missing required file: {rel}")
 
 
 def check_skills() -> set[str]:
@@ -93,7 +81,9 @@ def manifest_skill_ids() -> set[str]:
     if not path.is_file():
         return set()
     text = path.read_text(encoding="utf-8")
-    section = text.split("core_skills:", 1)[1].split("agents:", 1)[0] if "core_skills:" in text and "agents:" in text else ""
+    if "core_skills:" not in text or "agents:" not in text:
+        return set()
+    section = text.split("core_skills:", 1)[1].split("agents:", 1)[0]
     return {line.strip()[2:] for line in section.splitlines() if line.strip().startswith("- ")}
 
 
@@ -109,7 +99,7 @@ def check_manifest(skill_ids: set[str]) -> None:
 
 
 def scan_secrets() -> None:
-    excluded = {".git", ".pytest_cache", "node_modules"}
+    excluded = {".git", ".pytest_cache", "node_modules", ".venv"}
     for path in ROOT.rglob("*"):
         if not path.is_file() or any(part in excluded for part in path.parts):
             continue
@@ -127,12 +117,9 @@ def scan_secrets() -> None:
 
 def check_project_template() -> None:
     required = [
-        "templates/project/AGENTS.md",
-        "templates/project/PROJECT.md",
-        "templates/project/ARCHITECTURE.md",
-        "templates/project/SECURITY.md",
-        "templates/project/DECISIONS.md",
-        "templates/project/TASKS.md",
+        "templates/project/AGENTS.md", "templates/project/PROJECT.md",
+        "templates/project/ARCHITECTURE.md", "templates/project/SECURITY.md",
+        "templates/project/DECISIONS.md", "templates/project/TASKS.md",
     ]
     for rel in required:
         if not (ROOT / rel).is_file():
@@ -145,19 +132,14 @@ def main() -> int:
     check_manifest(skill_ids)
     check_project_template()
     scan_secrets()
-
     if ERRORS:
         print("Agent OS validation FAILED")
         for error in ERRORS:
             print(f"ERROR: {error}")
         return 1
-
     print("Agent OS validation PASSED")
     print(f"Skills: {len(skill_ids)}")
     print("No obvious credential patterns detected.")
-    if WARNINGS:
-        for warning in WARNINGS:
-            print(f"WARNING: {warning}")
     return 0
 
 

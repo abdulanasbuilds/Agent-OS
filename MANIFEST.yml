@@ -1,5 +1,5 @@
 name: agent-os
-version: 1.3.0
+version: 1.4.0
 purpose: Harness-neutral operating system for agentic development
 principles:
   - business-problem-first
@@ -46,18 +46,25 @@ core_skills:
   - media/video-understanding
   - media/realtime-multimodal
   - product/problem-discovery
-  - design/design-brief
-  - design/visual-direction
+  - design/design-intake
+  - design/design-direction
   - design/design-system
   - design/typography
-  - design/layout
-  - design/components
-  - design/motion
-  - design/asset-direction
-  - design/design-review
-  - design/web-design-guidelines
-  - design/design-variant-lab
-  - design/ux-review
+  - design/layout-and-composition
+  - design/component-architecture
+  - design/visual-reference-analysis
+  - design/asset-art-direction
+  - design/motion-system
+  - design/animation-engineering
+  - design/frontend-design
+  - design/ui-audit
+  - design/design-variants
+  - design/anti-ai-slop
+  - design/responsive-design
+  - design/interaction-design
+  - design/reference-discovery
+  - design/component-sourcing
+  - design/design-stack-selection
   - business/market-fit
   - operations/observability
 agents:

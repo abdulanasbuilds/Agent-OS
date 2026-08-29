@@ -1,5 +1,5 @@
 name: agent-os
-version: 1.9.0
+version: 2.0.0
 purpose: Harness-neutral operating system for agentic development
 principles:
   - business-problem-first
@@ -15,6 +15,7 @@ principles:
   - provenance-before-shipping
   - project-intake-before-creation
   - collision-before-write
+  - capability-before-claim
 core_skills:
   - core/project-context
   - core/planning
@@ -52,6 +53,7 @@ core_skills:
   - product/problem-discovery
   - project/project-lifecycle
   - project/project-intake
+  - project/project-new-type-router
   - project/new-project
   - project/new-app
   - project/new-saas
@@ -60,7 +62,17 @@ core_skills:
   - project/new-website
   - project/new-web-app
   - project/new-mobile-app
+  - project/new-desktop-app
+  - project/new-cli
+  - project/new-api
+  - project/new-library
+  - project/new-extension
   - project/new-experiment
+  - project/new-prototype
+  - project/project-github-repository
+  - project/workspace-bootstrap
+  - environment/environment-capabilities
+  - environment/project-machine-bootstrap
   - design/design
   - design/design-router
   - design/design-intake

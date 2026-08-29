@@ -1,5 +1,5 @@
 name: agent-os
-version: 1.5.0
+version: 1.6.0
 purpose: Harness-neutral operating system for agentic development
 principles:
   - business-problem-first
@@ -11,6 +11,8 @@ principles:
   - harness-portability
   - design-before-code
   - anti-generic-ai-slop
+  - reference-before-invention
+  - provenance-before-shipping
 core_skills:
   - core/project-context
   - core/planning
@@ -63,8 +65,13 @@ core_skills:
   - design/responsive-design
   - design/interaction-design
   - design/reference-discovery
+  - design/reference-library
+  - design/visual-search
+  - design/asset-provenance
+  - design/clone-reference
   - design/component-sourcing
   - design/design-stack-selection
+  - design/design-business-analysis
   - business/market-fit
   - operations/observability
 agents:
@@ -84,7 +91,12 @@ harnesses:
   - claude-code
   - codex
   - opencode
+references:
+  catalog: references/DESIGN-REFERENCE-CATALOG.yml
+  policy: docs/DESIGN-REFERENCE-LIBRARY.md
 adoption_model:
   third_party_skills: curated-reference-only
   executable_plugins: opt-in-after-review
   production_mutations: explicit-authorization
+  external_assets: provenance-required
+  screenshots: reference-only-unless-rights-cleared

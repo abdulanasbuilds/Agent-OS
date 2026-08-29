@@ -1,85 +1,41 @@
-version: 4
+version: 5
 canonical_command: /skill:<skill-id>
 
 aliases:
-  design:
-    target: design-router
-    context: general-design
-  website:
-    target: website
-    context: public-website
-  website-design:
-    target: website
-    context: public-website
-  web-design:
-    target: web-design
-    context: web-interface
-  web-app-design:
-    target: web-app-design
-    context: web-application
-  mobile-app-design:
-    target: mobile-app-design
-    context: mobile-application
-  app-design:
-    target: app-design
-    context: product-application
-  ui-design:
-    target: ui-design
-    context: user-interface
-  frontend-design:
-    target: frontend-design
-    context: frontend-implementation
-  presentation:
-    target: presentation-router
-    context: general-presentation
-  presentations:
-    target: presentation-router
-    context: general-presentation
-  slides:
-    target: presentation-router
-    context: slide-deck
-  deck:
-    target: presentation-router
-    context: slide-deck
-  ppt:
-    target: presentation-router
-    context: editable-pptx
-  pitch-deck:
-    target: pitch-deck
-    context: pitch-or-fundraising
-  presentation-design:
-    target: presentation-design
-    context: presentation-visual-design
-  new-project:
-    target: project-lifecycle
-    context: infer
-  new-app:
-    target: project-lifecycle
-    context: app
-  new-saas:
-    target: project-lifecycle
-    context: product
-  new-business:
-    target: project-lifecycle
-    context: business
-  new-client:
-    target: project-lifecycle
-    context: client
-  new-website:
-    target: project-lifecycle
-    context: website
-  new-web-app:
-    target: project-lifecycle
-    context: web-app
-  new-mobile-app:
-    target: project-lifecycle
-    context: mobile-app
-  new-experiment:
-    target: project-lifecycle
-    context: experiment
-  new-prototype:
-    target: project-lifecycle
-    context: experiment
+  design: {target: design-router, context: general-design}
+  website: {target: website, context: public-website}
+  website-design: {target: website, context: public-website}
+  web-design: {target: web-design, context: web-interface}
+  web-app-design: {target: web-app-design, context: web-application}
+  mobile-app-design: {target: mobile-app-design, context: mobile-application}
+  app-design: {target: app-design, context: product-application}
+  ui-design: {target: ui-design, context: user-interface}
+  frontend-design: {target: frontend-design, context: frontend-implementation}
+  presentation: {target: presentation-router, context: general-presentation}
+  presentations: {target: presentation-router, context: general-presentation}
+  slides: {target: presentation-router, context: slide-deck}
+  deck: {target: presentation-router, context: slide-deck}
+  ppt: {target: presentation-router, context: editable-pptx}
+  pitch-deck: {target: pitch-deck, context: pitch-or-fundraising}
+  presentation-design: {target: presentation-design, context: presentation-visual-design}
+  new-project: {target: project-lifecycle, context: infer}
+  new-app: {target: project-lifecycle, context: app}
+  new-saas: {target: project-lifecycle, context: product}
+  new-business: {target: project-lifecycle, context: business}
+  new-client: {target: project-lifecycle, context: client}
+  new-website: {target: project-lifecycle, context: website}
+  new-web-app: {target: project-lifecycle, context: web-app}
+  new-mobile-app: {target: project-lifecycle, context: mobile-app}
+  new-desktop-app: {target: project-lifecycle, context: desktop-app}
+  new-cli: {target: project-lifecycle, context: cli}
+  new-api: {target: project-lifecycle, context: api}
+  new-library: {target: project-lifecycle, context: library}
+  new-extension: {target: project-lifecycle, context: extension}
+  new-experiment: {target: project-lifecycle, context: experiment}
+  new-prototype: {target: project-lifecycle, context: experiment}
+  bootstrap: {target: workspace-bootstrap, context: workspace}
+  setup-project: {target: workspace-bootstrap, context: workspace}
+  github-repo: {target: project-github-repository, context: remote-repository}
 
 routing_rules:
   - "Broad design requests load design-router before specialist skills when direction or product context is unresolved."
@@ -89,55 +45,27 @@ routing_rules:
   - "Do not turn a business idea into software automatically; validate the business problem and choose the appropriate outcome."
   - "Client/proprietary work defaults to a private repository unless public visibility is explicitly requested."
   - "Check local and remote collisions before creating anything."
-  - "Aliases are entry points, not separate methodologies."
   - "Load only the smallest set of specialist skills required by the task."
   - "Business or communication context precedes visual direction for product-facing work."
   - "Reference retrieval precedes invention when the user requests inspiration or reference-driven work."
   - "Use design-variants or presentation-variants when multiple materially different directions are appropriate."
   - "Use clone-reference or presentation-clone for faithful recreation only after ownership/authorization is established."
   - "For presentations, lock narrative/content structure before detailed styling unless the user has already approved the structure."
+  - "Project-type aliases must resolve to an existing canonical skill or lifecycle profile; never leave declared commands orphaned."
 
 harnesses:
   pi:
-    skill_path_priority:
-      - ~/.pi/agent/skills
-      - ~/.agents/skills
-      - .pi/skills
-      - .agents/skills
+    skill_path_priority: [~/.pi/agent/skills, ~/.agents/skills, .pi/skills, .agents/skills]
     invocation: "/skill:<skill-id>"
-    aliases: "Use alias skill IDs; they delegate to canonical routers/specialists."
-    notes: "Pi loads skill descriptions first and full skill content on demand."
-
   claude-code:
-    skill_path_priority:
-      - ~/.claude/skills
-      - .claude/skills
-      - ~/.agents/skills
-      - .agents/skills
+    skill_path_priority: [~/.claude/skills, .claude/skills, ~/.agents/skills, .agents/skills]
     invocation: "/<skill-id>"
-    aliases: "Alias skill names are exposed as normal slash skills when installed."
-    notes: "Keep side-effecting workflows approval-gated."
-
   codex:
-    skill_path_priority:
-      - ~/.codex/skills
-      - .codex/skills
-      - ~/.agents/skills
-      - .agents/skills
+    skill_path_priority: [~/.codex/skills, .codex/skills, ~/.agents/skills, .agents/skills]
     invocation: "Harness-dependent"
-    aliases: "Resolve canonical IDs through Agent Skills and AGENTS.md; do not rely on undocumented slash aliases."
-    notes: "Verify the installed Codex release before adding harness-specific command automation."
-
   opencode:
-    skill_path_priority:
-      - ~/.config/opencode/skills
-      - .opencode/skills
-      - ~/.claude/skills
-      - .claude/skills
-      - ~/.agents/skills
-    invocation: "Native skill tool; interactive slash availability depends on runtime configuration."
-    aliases: "Use alias IDs as skills; preserve OpenCode permission rules independently."
-    notes: "OpenCode keys skills by ID and can control skill visibility/permission separately."
+    skill_path_priority: [~/.config/opencode/skills, .opencode/skills, ~/.claude/skills, .claude/skills, ~/.agents/skills]
+    invocation: "Native skill tool"
 
 portable_directory_rule:
   canonical: "skills/<family>/<skill-id>/SKILL.md"

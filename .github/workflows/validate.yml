@@ -5,6 +5,11 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: agent-os-validation-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -14,7 +19,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
 
       - name: Validate Agent OS
         run: python3 scripts/validate_agent_os.py

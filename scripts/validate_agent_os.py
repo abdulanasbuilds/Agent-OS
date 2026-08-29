@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
-"""Validate Agent OS structure, skill metadata, manifest references, and obvious secret leaks.
-
-Standard-library only so CI and phone-based environments do not need extra packages.
-"""
+"""Validate Agent OS structure, manifest references, command targets, metadata, and obvious secret leaks."""
 from __future__ import annotations
 
 import re
@@ -11,7 +8,6 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ERRORS: list[str] = []
-WARNINGS: list[str] = []
 NAME_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 SECRET_PATTERNS = [
     re.compile(r"\bsk-[A-Za-z0-9]{16,}\b"),
@@ -25,6 +21,11 @@ REQUIRED_FILES = [
     "global/MEMORY-POLICY.md", "global/MODEL-ROUTING.md", "global/SKILL-ROUTING.md",
     "docs/SKILL-SPEC.md", "docs/HARNESS-INTEROPERABILITY.md",
     "docs/SECURITY-AND-ADOPTION.md", "adapters/COMMAND-MAP.yml",
+]
+PROJECT_FILES = [
+    "templates/project/AGENTS.md", "templates/project/PROJECT.md",
+    "templates/project/ARCHITECTURE.md", "templates/project/SECURITY.md",
+    "templates/project/DECISIONS.md", "templates/project/TASKS.md",
 ]
 
 
@@ -50,11 +51,18 @@ def check_required_files() -> None:
     for rel in REQUIRED_FILES:
         if not (ROOT / rel).is_file():
             fail(f"missing required file: {rel}")
+    for rel in PROJECT_FILES:
+        if not (ROOT / rel).is_file():
+            fail(f"project template missing: {rel}")
 
 
 def check_skills() -> set[str]:
     ids: set[str] = set()
-    for path in sorted((ROOT / "skills").glob("**/SKILL.md")):
+    root = ROOT / "skills"
+    if not root.is_dir():
+        fail("skills directory missing")
+        return ids
+    for path in sorted(root.glob("**/SKILL.md")):
         rel = path.relative_to(ROOT).as_posix()
         parent = path.parent.name
         front = parse_frontmatter(path.read_text(encoding="utf-8"))
@@ -82,6 +90,7 @@ def manifest_skill_ids() -> set[str]:
         return set()
     text = path.read_text(encoding="utf-8")
     if "core_skills:" not in text or "agents:" not in text:
+        fail("MANIFEST.yml missing core_skills or agents section")
         return set()
     section = text.split("core_skills:", 1)[1].split("agents:", 1)[0]
     return {line.strip()[2:] for line in section.splitlines() if line.strip().startswith("- ")}
@@ -89,13 +98,32 @@ def manifest_skill_ids() -> set[str]:
 
 def check_manifest(skill_ids: set[str]) -> None:
     declared = manifest_skill_ids()
+    actual = {
+        path.parent.relative_to(ROOT / "skills").as_posix()
+        for path in (ROOT / "skills").glob("**/SKILL.md")
+    }
     for skill_path in sorted(declared):
-        name = skill_path.rsplit("/", 1)[-1]
         expected = ROOT / "skills" / skill_path / "SKILL.md"
+        name = skill_path.rsplit("/", 1)[-1]
         if not expected.is_file():
             fail(f"manifest skill missing: {skill_path}")
         elif name not in skill_ids:
             fail(f"manifest skill name mismatch: {skill_path}")
+    for extra in sorted(actual - declared):
+        fail(f"skill not registered in manifest: {extra}")
+
+
+def check_command_targets() -> None:
+    path = ROOT / "adapters/COMMAND-MAP.yml"
+    if not path.is_file():
+        return
+    text = path.read_text(encoding="utf-8")
+    for line in text.splitlines():
+        if "target:" not in line:
+            continue
+        target = line.split("target:", 1)[1].strip().split(",", 1)[0].strip().strip("{} ")
+        if target and not (ROOT / "skills" / target / "SKILL.md").is_file():
+            fail(f"command target missing: {target}")
 
 
 def scan_secrets() -> None:
@@ -115,22 +143,11 @@ def scan_secrets() -> None:
                 break
 
 
-def check_project_template() -> None:
-    required = [
-        "templates/project/AGENTS.md", "templates/project/PROJECT.md",
-        "templates/project/ARCHITECTURE.md", "templates/project/SECURITY.md",
-        "templates/project/DECISIONS.md", "templates/project/TASKS.md",
-    ]
-    for rel in required:
-        if not (ROOT / rel).is_file():
-            fail(f"project template missing: {rel}")
-
-
 def main() -> int:
     check_required_files()
     skill_ids = check_skills()
     check_manifest(skill_ids)
-    check_project_template()
+    check_command_targets()
     scan_secrets()
     if ERRORS:
         print("Agent OS validation FAILED")

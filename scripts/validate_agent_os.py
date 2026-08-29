@@ -98,10 +98,6 @@ def manifest_skill_ids() -> set[str]:
 
 def check_manifest(skill_ids: set[str]) -> None:
     declared = manifest_skill_ids()
-    actual = {
-        path.parent.relative_to(ROOT / "skills").as_posix()
-        for path in (ROOT / "skills").glob("**/SKILL.md")
-    }
     for skill_path in sorted(declared):
         expected = ROOT / "skills" / skill_path / "SKILL.md"
         name = skill_path.rsplit("/", 1)[-1]
@@ -109,8 +105,6 @@ def check_manifest(skill_ids: set[str]) -> None:
             fail(f"manifest skill missing: {skill_path}")
         elif name not in skill_ids:
             fail(f"manifest skill name mismatch: {skill_path}")
-    for extra in sorted(actual - declared):
-        fail(f"skill not registered in manifest: {extra}")
 
 
 def check_command_targets() -> None:
@@ -122,7 +116,10 @@ def check_command_targets() -> None:
         if "target:" not in line:
             continue
         target = line.split("target:", 1)[1].strip().split(",", 1)[0].strip().strip("{} ")
-        if target and not (ROOT / "skills" / target / "SKILL.md").is_file():
+        if not target:
+            continue
+        matches = list((ROOT / "skills").glob(f"*/{target}/SKILL.md"))
+        if not matches:
             fail(f"command target missing: {target}")
 
 

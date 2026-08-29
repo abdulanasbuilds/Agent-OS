@@ -1,5 +1,5 @@
 name: agent-os
-version: 1.8.0
+version: 1.9.0
 purpose: Harness-neutral operating system for agentic development
 principles:
   - business-problem-first
@@ -13,6 +13,8 @@ principles:
   - anti-generic-ai-slop
   - reference-before-invention
   - provenance-before-shipping
+  - project-intake-before-creation
+  - collision-before-write
 core_skills:
   - core/project-context
   - core/planning
@@ -48,6 +50,17 @@ core_skills:
   - media/video-understanding
   - media/realtime-multimodal
   - product/problem-discovery
+  - project/project-lifecycle
+  - project/project-intake
+  - project/new-project
+  - project/new-app
+  - project/new-saas
+  - project/new-business
+  - project/new-client
+  - project/new-website
+  - project/new-web-app
+  - project/new-mobile-app
+  - project/new-experiment
   - design/design
   - design/design-router
   - design/design-intake

@@ -19,80 +19,86 @@ Agent OS separates reusable agent behavior from any single coding harness. The s
 
 ## Recommended execution loop
 
-DISCOVER → DESIGN INTAKE → RESEARCH → PLAN → IMPLEMENT → TEST → DESIGN/UX REVIEW → SECURITY GATE → RELEASE → LEARN
+DISCOVER → INTAKE → RESEARCH → PLAN → IMPLEMENT → TEST → REVIEW → SECURITY GATE → RELEASE → LEARN
 
 ## Repository map
 
-- `global/` — universal operating rules, including the anti-slop design policy.
+- `global/` — universal operating rules, including security, tool, design, and presentation policies.
 - `skills/` — reusable workflows and expertise.
 - `agents/` — specialist role instructions.
 - `prompts/` — reusable prompt templates.
 - `policies/` — security and permission boundaries.
-- `templates/project/` — starter structure for every new product.
+- `references/` — curated discovery catalogs for design and presentation sources.
+- `templates/project/` — starter structure for every new product, including design and presentation artifacts.
 - `adapters/` — harness-specific wiring and command mappings.
 - `tools/` — tool contracts and integration notes.
 - `checklists/` — repeatable execution gates.
 - `scripts/` — bootstrap and validation helpers.
-- `docs/` — operating model, interoperability, resource-adoption decisions, and design workflows.
+- `docs/` — operating model, interoperability, resource-adoption decisions, design workflows, and presentation workflows.
 
 ## Global vs project
 
-**Global:** principles, security, tool policy, evidence discipline, research methodology, generic engineering practices, reusable design practices, and reusable skills.
+**Global:** principles, security, tool policy, evidence discipline, research methodology, generic engineering practices, reusable design/presentation practices, and reusable skills.
 
-**Project:** buyer/user context, product rules, architecture, schema, integrations, environment, design brief, design system, decisions, project-specific security, known bugs, assets, and roadmap.
+**Project:** buyer/user context, product rules, architecture, schema, integrations, environment, design/presentation briefs and systems, decisions, project-specific security, known bugs, assets, and roadmap.
 
 Start a new project from `templates/project/` and keep project-specific knowledge there.
 
 ## Design system
 
-Design is treated as a first-class product capability rather than a final polish step.
+Design is treated as a first-class product capability rather than final polish. The design layer includes design intake, business-aware visual direction, typography, layout, components, interaction, motion, asset direction/provenance, reference discovery, UI/accessibility/performance review, controlled variants, and anti-AI-slop safeguards.
 
-The global design layer includes:
+When the user says `design`, `website`, `web-design`, `frontend-design`, `mobile-app-design`, or another supported visual entry point, route through the canonical design router and load only the specialist skills the project actually needs.
 
-- design intake and context gathering
-- visual direction and anti-AI-slop review
-- design-system construction
-- typography
-- responsive composition
-- component architecture
-- interaction design
-- purposeful motion
-- animation engineering
-- asset direction and provenance
-- reference discovery and reference analysis
-- UI/accessibility/performance review
-- controlled design-variant exploration
-- careful component and design-stack selection
+See `global/DESIGN-POLICY.md`, `global/DESIGN-ROUTING.md`, `docs/DESIGN-LAB.md`, and `docs/DESIGN-REFERENCE-LIBRARY.md`.
 
-See `global/DESIGN-POLICY.md`, `global/DESIGN-ROUTING.md`, `docs/DESIGN-LAB.md`, and `docs/DESIGN-RESOURCE-ADOPTION.md`.
+## Presentation system
 
-### Design variants
+Presentation work is a separate first-class capability because a deck has a narrative, audience, delivery mode, slide grammar, data-storytelling requirements, speaker notes, accessibility requirements, and output-format constraints that differ from product UI.
 
-When multiple directions are legitimately possible, use the variant lab instead of guessing the final look:
+Supported entry points include:
 
 ```text
-approved project state
-        ↓
-  variant-a  variant-b  variant-c
-        ↓
- local previews + screenshots
-        ↓
- compare against the same criteria
-        ↓
- select one
-        ↓
- record decision
-        ↓
- promote selected implementation
+/presentation
+/presentations
+/slides
+/deck
+/ppt
+/pitch-deck
+/presentation-design
 ```
 
-Variants must remain isolated from production until selected.
+These route to `presentation-router`, which determines communication purpose and business/decision context before loading narrative, visual storytelling, slide composition, assets, typography, production, and QA skills.
 
-## Design references
+The presentation system supports live talks, forwarded/self-read decks, pitch decks, teaching/training decks, executive reports, product/demo decks, PPTX, PDF, and HTML/web outputs.
 
-Visual galleries, component libraries, and design communities are discovery sources, not blanket dependencies. Agent OS records what a reference contributes and whether its assets/code may be reused.
+See `global/PRESENTATION-POLICY.md`, `docs/PRESENTATION-WORKFLOW.md`, `references/PRESENTATION-REFERENCE-CATALOG.yml`, and the presentation project templates.
 
-The project reference board and asset register preserve provenance so reference-driven work does not silently become unlicensed copying.
+## Design and presentation variants
+
+When multiple visual directions are legitimately possible, use an isolated variant lab rather than repeatedly overwriting the main implementation.
+
+```text
+approved baseline
+      ↓
+variant A / B / C
+      ↓
+local previews + screenshots
+      ↓
+compare against fixed criteria
+      ↓
+user selects
+      ↓
+record decision
+      ↓
+promote selected direction
+```
+
+## References and assets
+
+Visual galleries, component libraries, presentation templates, screenshots, fonts, animations, images, and other external material are discovery sources unless reuse rights are verified.
+
+Agent OS records provenance and reuse status. Global catalogs do not become hidden asset dumps. Approved project assets belong in the project workspace with their source/license information.
 
 ## Harness strategy
 
@@ -102,51 +108,39 @@ The project reference board and asset register preserve provenance so reference-
 - **OpenCode** — model/provider experimentation.
 - **Gemini** — multimodal video/realtime perception where appropriate.
 
-See `docs/HARNESS-INTEROPERABILITY.md` and `adapters/COMMAND-MAP.yml` for the portable mapping.
+See `docs/HARNESS-INTEROPERABILITY.md` and `adapters/COMMAND-MAP.yml`.
 
 ## Skill invocation
 
-Agent OS uses a canonical skill ID. Harnesses translate that ID into their own interface.
-
-Examples:
+Agent OS uses canonical skill IDs and maps them to harness-specific interfaces.
 
 ```text
-/skill:planning                 # Pi/native Agent Skills style
+/skill:planning                 # Pi-style
 /planning                       # Claude Code style
-planning via native skill tool  # OpenCode
-load the canonical skill ID     # Codex-compatible workflow
+native skill tool               # OpenCode
+Agent Skills + AGENTS.md        # Codex-compatible workflow
 ```
 
-The skill itself never grants authority. Harness permissions remain the enforcement boundary.
+A skill never grants tool permission. Harness permissions remain the authority boundary.
 
-## Bootstrap
+## Security posture
 
-The repository includes a standard-library-only validator:
+Agent OS intentionally avoids bundling large collections of unreviewed third-party MCP servers or executable plugins. External skills and tools are reviewed for provenance, permissions, data handling, maintenance, licensing, dependency risk, and prompt-injection/tool-poisoning exposure before adoption.
+
+Production mutations, destructive operations, secret access, deployment, and other high-impact actions remain approval-gated unless a project explicitly establishes a safer automated boundary.
+
+## Validation
+
+Run the standard-library-only validator:
 
 ```bash
 python3 scripts/validate_agent_os.py
 ```
 
-To install the canonical skills into a shared Agent Skills directory:
+Every push and pull request runs the validator through GitHub Actions with read-only repository permissions.
 
-```bash
-bash scripts/install-global-skill-links.sh ~/.agents/skills
-```
-
-Check the installed harness release before adding additional automation.
-
-## Security posture
-
-Agent OS intentionally avoids bundling a large collection of unreviewed third-party MCP servers or executable plugins. Integrations are reviewed for provenance, permissions, data handling, maintenance, dependency risk, licensing, and prompt-injection/tool-poisoning exposure before adoption.
-
-Tools are capabilities, not authority. Production mutations, destructive operations, secret access, deployment and other high-impact actions remain approval-gated unless a project explicitly defines a safer automated boundary.
-
-## CI
-
-Every push and pull request runs `scripts/validate_agent_os.py` through GitHub Actions with read-only repository permissions.
-
-## Adding a capability
+## Adding capabilities
 
 Do not add a tool because it is popular. First establish necessity, provenance, permission scope, maintenance, licensing, and security evidence. Prefer an Agent OS-native skill when the durable value is instruction/knowledge rather than executable code.
 
-Record significant third-party adoption decisions in `docs/` and keep volatile provider behavior tied to current official documentation.
+Keep fast-moving provider behavior tied to current official documentation. Do not freeze volatile API behavior inside long-lived prompts.

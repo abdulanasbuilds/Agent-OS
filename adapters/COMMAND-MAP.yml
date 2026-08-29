@@ -1,0 +1,54 @@
+version: 1
+canonical_command: /skill:<skill-id>
+
+harnesses:
+  pi:
+    skill_path_priority:
+      - ~/.pi/agent/skills
+      - ~/.agents/skills
+      - .pi/skills
+      - .agents/skills
+    invocation: "/skill:<skill-id>"
+    notes: "Skills are discovered progressively; project-local skills require trusted project context."
+
+  claude-code:
+    skill_path_priority:
+      - ~/.claude/skills
+      - .claude/skills
+      - ~/.agents/skills
+      - .agents/skills
+    invocation: "/<skill-id>"
+    notes: "Claude Code maps SKILL.md names to slash commands. Side-effect skills should set disable-model-invocation: true."
+
+  codex:
+    skill_path_priority:
+      - ~/.codex/skills
+      - .codex/skills
+      - ~/.agents/skills
+      - .agents/skills
+    invocation: "Harness-dependent"
+    notes: "Use the canonical Agent Skills layout and AGENTS.md for persistent project instructions; verify the installed Codex release before adding harness-specific automation."
+
+  opencode:
+    skill_path_priority:
+      - ~/.config/opencode/skills
+      - .opencode/skills
+      - ~/.claude/skills
+      - .claude/skills
+      - ~/.agents/skills
+      - .agents/skills
+    invocation: "Native skill tool; interactive command availability depends on runtime"
+    notes: "Keep IDs lowercase kebab-case and directory-aligned for portability. Permission policy is configured independently from skills."
+
+portable_directory_rule:
+  canonical: "skills/<family>/<skill-id>/SKILL.md"
+  mirrored_runtime_paths:
+    - .agents/skills/<skill-id>/SKILL.md
+    - .claude/skills/<skill-id>/SKILL.md
+    - .pi/skills/<skill-id>/SKILL.md
+    - .opencode/skills/<skill-id>/SKILL.md
+
+safety:
+  - "Do not copy executable third-party plugins into the global layer without review."
+  - "Do not use skill invocation as a permission bypass."
+  - "Keep deployment, production mutation, secret access and destructive operations approval-gated."

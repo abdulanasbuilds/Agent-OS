@@ -1,0 +1,25 @@
+# Secrets / local state
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Agent/runtime state
+.sessions/
+.agent-state/
+.pi/local/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Temporary media/output
+.tmp/
+.cache/
+out/
+dist/

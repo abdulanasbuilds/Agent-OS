@@ -1,0 +1,89 @@
+version: 1
+purpose: Curated discovery sources for presentation narrative, slide composition, visual storytelling, templates, output formats, and accessibility.
+usage_policy:
+  default: reference-only
+  external_assets: verify-provenance-and-license
+  executable_tools: opt-in-after-review
+  proprietary_templates: do-not-redistribute-without-rights
+sources:
+  - name: Google Slides API
+    category: production-and-automation
+    url: https://developers.google.com/workspace/slides/api
+    use: official presentation structure and automation reference
+    trust: primary
+  - name: Microsoft PowerPoint accessibility guidance
+    category: accessibility
+    url: https://support.microsoft.com/en-us/accessibility/powerpoint/make-your-powerpoint-presentations-accessible-to-people-with-disabilities
+    use: alt text, reading order, contrast, titles, captions, accessibility review
+    trust: primary
+  - name: presentation-skill patterns
+    category: agent-workflow-reference
+    url: https://github.com/appautomaton/presentation
+    use: consultant, brand system, deck-design and QA workflow patterns
+    trust: community-reference
+  - name: presentation-creator skill
+    category: agent-workflow-reference
+    url: https://github.com/mblode/agent-skills/tree/main/skills/presentation-creator
+    use: narrative, slide-type, speaker-note and QA patterns
+    trust: community-reference
+  - name: slide-skill
+    category: agent-workflow-reference
+    url: https://github.com/hunkim/slide-skill
+    use: simplicity, one-point-per-slide, readability and pre-ship checks
+    trust: community-reference
+  - name: Google Slides
+    category: design-and-output
+    url: https://slides.google.com/
+    use: editable presentation workflows and review
+    trust: primary-product
+  - name: PowerPoint
+    category: design-and-output
+    url: https://www.microsoft.com/microsoft-365/powerpoint
+    use: editable PPTX production and platform QA
+    trust: primary-product
+  - name: Figma Community
+    category: inspiration-and-reference
+    url: https://www.figma.com/community
+    use: slide composition, visual systems and presentation references
+    trust: community-platform
+  - name: Behance
+    category: inspiration-and-reference
+    url: https://www.behance.net/
+    use: editorial, brand, pitch and presentation visual references
+    trust: community-platform
+  - name: Dribbble
+    category: inspiration-and-reference
+    url: https://dribbble.com/
+    use: interface, motion and visual composition references
+    trust: community-platform
+  - name: Envato Elements
+    category: asset-and-template-source
+    url: https://elements.envato.com/
+    use: licensed templates/assets when the project has an appropriate subscription/license
+    trust: commercial-platform
+    caution: verify the specific item's license and project registration requirements
+  - name: Adobe Express
+    category: design-and-motion-tool
+    url: https://www.adobe.com/express/
+    use: rapid visual exploration and simple motion assets
+    trust: commercial-platform
+  - name: Jitter
+    category: motion-reference-and-tool
+    url: https://jitter.video/
+    use: motion exploration and reference
+    trust: commercial-platform
+  - name: 60fps
+    category: interaction-reference
+    url: https://60fps.design/
+    use: real interaction and motion references
+    trust: reference-site
+  - name: Awwwards
+    category: inspiration-and-reference
+    url: https://www.awwwards.com/
+    use: high-end web and motion references that may inform presentation visual language
+    trust: reference-site
+notes:
+  - Treat inspiration as evidence and ideas, not permission to copy.
+  - Prefer primary documentation for platform behavior and accessibility.
+  - Prefer project-owned or explicitly licensed assets for shipped decks.
+  - Keep volatile tool behavior outside this static catalog; retrieve current docs before implementation.

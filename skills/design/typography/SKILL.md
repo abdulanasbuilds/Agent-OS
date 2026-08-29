@@ -1,22 +1,22 @@
 ---
 name: typography
-description: Design and review type systems for websites and interfaces using deliberate hierarchy, readability, language support, font loading, and brand fit rather than trend-driven font choices.
+description: Choose and implement purposeful web typography for hierarchy, personality, readability, multilingual content, responsive behavior, and performance. Use for new interfaces, rebrands, and visual refinement.
 ---
 
 # Typography
 
-Typography is structural. Treat it as information architecture plus brand expression.
+Typography is structural: it defines hierarchy, rhythm, readability, and brand character.
 
 ## Process
-1. Identify content language(s), reading length, audience, and density.
-2. Choose type roles rather than isolated fonts: display, heading, body, UI/meta, data when needed.
-3. Prefer a small family set with enough weights and useful character coverage.
-4. Define scale, line-height, tracking, measure, wrapping behavior, and emphasis.
-5. Check numeral behavior for prices, metrics, tables, and dashboards.
-6. Check loading cost and fallback behavior.
+1. Identify language(s), audience, reading length, density, brand tone, and viewing conditions.
+2. Choose roles first: display, heading, body, UI/meta, numeric/data, code when needed.
+3. Prefer a small family set with useful weights and character coverage.
+4. Define scale, line-height, tracking, measure, wrapping, emphasis, and responsive behavior.
+5. Check numeral styles for prices, metrics, tables, dashboards, and dates.
+6. Check font loading, fallback behavior, licensing, caching, and layout shift.
 
 ## Anti-trend rule
-Never select a font simply because it is fashionable in AI/SaaS design. The choice must survive the brand and content test.
+Never select a font merely because it is fashionable in AI/SaaS design. The choice must fit the product, content, audience, and technical budget.
 
 ## Verification
-Review long paragraphs, headings, forms, navigation, numbers, multilingual text where applicable, narrow mobile widths, and large displays.
+Review long-form text, navigation, forms, headings, numbers, multilingual text where applicable, narrow mobile widths, and large displays. Record font sources/licenses and implementation constraints in the project design system.

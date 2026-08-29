@@ -23,7 +23,7 @@ DISCOVER → DESIGN INTAKE → RESEARCH → PLAN → IMPLEMENT → TEST → DESI
 
 ## Repository map
 
-- `global/` — universal operating rules, including the anti-slop design constitution.
+- `global/` — universal operating rules, including the anti-slop design policy.
 - `skills/` — reusable workflows and expertise.
 - `agents/` — specialist role instructions.
 - `prompts/` — reusable prompt templates.
@@ -33,7 +33,7 @@ DISCOVER → DESIGN INTAKE → RESEARCH → PLAN → IMPLEMENT → TEST → DESI
 - `tools/` — tool contracts and integration notes.
 - `checklists/` — repeatable execution gates.
 - `scripts/` — bootstrap and validation helpers.
-- `docs/` — operating model, interoperability, skill specifications, adoption standards, and design workflows.
+- `docs/` — operating model, interoperability, resource-adoption decisions, and design workflows.
 
 ## Global vs project
 
@@ -50,18 +50,21 @@ Design is treated as a first-class product capability rather than a final polish
 The global design layer includes:
 
 - design intake and context gathering
-- visual direction and anti-slop review
+- visual direction and anti-AI-slop review
 - design-system construction
 - typography
-- responsive layout
-- component composition
+- responsive composition
+- component architecture
+- interaction design
 - purposeful motion
+- animation engineering
 - asset direction and provenance
-- design/accessibility review
-- current Web Interface Guidelines review
-- isolated design-variant exploration
+- reference discovery and reference analysis
+- UI/accessibility/performance review
+- controlled design-variant exploration
+- careful component and design-stack selection
 
-See `global/DESIGN-CONSTITUTION.md`, `docs/DESIGN-VARIANT-WORKFLOW.md`, and `docs/DESIGN-RESOURCES.md`.
+See `global/DESIGN-POLICY.md`, `global/DESIGN-ROUTING.md`, `docs/DESIGN-LAB.md`, and `docs/DESIGN-RESOURCE-ADOPTION.md`.
 
 ### Design variants
 
@@ -70,9 +73,7 @@ When multiple directions are legitimately possible, use the variant lab instead 
 ```text
 approved project state
         ↓
- design/variant-a
- design/variant-b
- design/variant-c
+  variant-a  variant-b  variant-c
         ↓
  local previews + screenshots
         ↓
@@ -86,6 +87,12 @@ approved project state
 ```
 
 Variants must remain isolated from production until selected.
+
+## Design references
+
+Visual galleries, component libraries, and design communities are discovery sources, not blanket dependencies. Agent OS records what a reference contributes and whether its assets/code may be reused.
+
+The project reference board and asset register preserve provenance so reference-driven work does not silently become unlicensed copying.
 
 ## Harness strategy
 
@@ -105,9 +112,9 @@ Examples:
 
 ```text
 /skill:planning                 # Pi/native Agent Skills style
-/planning                      # Claude Code style
-planning via native skill tool # OpenCode
-load the canonical skill ID    # Codex-compatible workflow
+/planning                       # Claude Code style
+planning via native skill tool  # OpenCode
+load the canonical skill ID     # Codex-compatible workflow
 ```
 
 The skill itself never grants authority. Harness permissions remain the enforcement boundary.

@@ -1,5 +1,5 @@
 name: agent-os
-version: 2.0.0
+version: 2.1.0
 purpose: Harness-neutral operating system for agentic development
 principles:
   - business-problem-first
@@ -16,9 +16,12 @@ principles:
   - project-intake-before-creation
   - collision-before-write
   - capability-before-claim
+  - explore-in-isolation
+  - select-before-promotion
 core_skills:
   - core/project-context
   - core/planning
+  - core/option-lab
   - engineering/architecture
   - engineering/testing
   - engineering/debugging

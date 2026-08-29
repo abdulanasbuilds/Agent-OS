@@ -1,5 +1,5 @@
 name: agent-os
-version: 1.7.0
+version: 1.8.0
 purpose: Harness-neutral operating system for agentic development
 principles:
   - business-problem-first
@@ -81,6 +81,22 @@ core_skills:
   - design/mobile-app-design
   - design/ui-design
   - design/app-design
+  - presentation/presentation
+  - presentation/presentation-router
+  - presentation/presentation-intake
+  - presentation/presentation-narrative
+  - presentation/slide-composition
+  - presentation/visual-storytelling
+  - presentation/data-storytelling
+  - presentation/presentation-typography
+  - presentation/speaker-notes
+  - presentation/presentation-assets
+  - presentation/presentation-accessibility
+  - presentation/presentation-qa
+  - presentation/presentation-variants
+  - presentation/deck-production
+  - presentation/presentation-clone
+  - presentation/presentation-reference-analysis
   - business/market-fit
   - operations/observability
 agents:
@@ -101,8 +117,10 @@ harnesses:
   - codex
   - opencode
 references:
-  catalog: references/DESIGN-REFERENCE-CATALOG.yml
-  policy: docs/DESIGN-REFERENCE-LIBRARY.md
+  design_catalog: references/DESIGN-REFERENCE-CATALOG.yml
+  presentation_catalog: references/PRESENTATION-REFERENCE-CATALOG.yml
+  design_policy: docs/DESIGN-REFERENCE-LIBRARY.md
+  presentation_policy: global/PRESENTATION-POLICY.md
 adoption_model:
   third_party_skills: curated-reference-only
   executable_plugins: opt-in-after-review

@@ -1,1 +1,0 @@
-Temporary API marker; this file should not remain in the repository.

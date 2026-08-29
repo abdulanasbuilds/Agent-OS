@@ -1,0 +1,51 @@
+version: 1
+canonical_target: project-lifecycle
+
+aliases:
+  new-project:
+    target: project-lifecycle
+    profile: infer
+  new-app:
+    target: project-lifecycle
+    profile: app
+  new-saas:
+    target: project-lifecycle
+    profile: product
+  new-business:
+    target: project-lifecycle
+    profile: business
+  new-client:
+    target: project-lifecycle
+    profile: client
+  new-website:
+    target: project-lifecycle
+    profile: website
+  new-web-app:
+    target: project-lifecycle
+    profile: web-app
+  new-mobile-app:
+    target: project-lifecycle
+    profile: mobile-app
+  new-experiment:
+    target: project-lifecycle
+    profile: experiment
+  new-prototype:
+    target: project-lifecycle
+    profile: experiment
+
+routing:
+  - "Aliases are thin entry points; project-lifecycle owns the workflow."
+  - "Always run project-intake before destructive or externally visible creation."
+  - "Use the business profile when the user is starting a business/idea rather than asking for an app first."
+  - "A business idea may end in validation work instead of software creation."
+  - "Use client profile for third-party/client work and default the remote repository to private unless public is explicitly requested."
+  - "Use design intake only when the project has visual/UI work; do not force web design onto backend or research projects."
+  - "Select provider-specific database/auth/security skills only when the architecture requires them."
+
+creation_policy:
+  local_directory: "safe parent path + sanitized kebab-case slug + collision check"
+  git: "initialize only after project brief and template selection"
+  github: "create remote only when authenticated GitHub capability exists"
+  visibility: "private by default for client/proprietary work; otherwise ask"
+  secrets: "never commit .env, credentials, private keys, or tokens"
+  verification: "verify both local git state and remote push result before reporting success"

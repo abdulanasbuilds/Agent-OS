@@ -1,5 +1,5 @@
 name: agent-os
-version: 1.0.0
+version: 1.1.0
 purpose: Harness-neutral operating system for agentic development
 principles:
   - business-problem-first
@@ -24,9 +24,23 @@ core_skills:
   - research/research
   - research/documentation
   - research/evidence
+  - research/provider-docs
   - security/security-audit
+  - security/security-review
   - security/prompt-injection-defense
   - security/dependency-supply-chain
+  - security/authentication
+  - security/authorization
+  - security/database-security
+  - security/rls-review
+  - security/firebase-security-rules
+  - data/database-design
+  - data/postgres
+  - data/database-migrations
+  - platform/supabase
+  - platform/firebase
+  - platform/firestore
+  - platform/cloudflare-data
   - media/video-understanding
   - media/realtime-multimodal
   - product/problem-discovery
@@ -50,3 +64,7 @@ harnesses:
   - claude-code
   - codex
   - opencode
+adoption_model:
+  third_party_skills: curated-reference-only
+  executable_plugins: opt-in-after-review
+  production_mutations: explicit-authorization

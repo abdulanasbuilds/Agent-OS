@@ -11,6 +11,7 @@
 .sessions/
 .agent-state/
 .pi/local/
+.agent-os-personal/
 
 # OS/editor
 .DS_Store

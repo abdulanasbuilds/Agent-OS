@@ -1,4 +1,4 @@
-version: 10
+version: 11
 canonical_command: /skill:<skill-id>
 
 aliases:
@@ -39,6 +39,10 @@ aliases:
   app-design: {target: design/app-design, context: product-application}
   ui-design: {target: design/ui-design, context: user-interface}
   frontend-design: {target: design/frontend-design, context: frontend-implementation}
+  reference-build: {target: design/reference-to-production, context: reference-driven-production}
+  clone-build: {target: design/reference-to-production, context: authorized-reference-production}
+  restyle: {target: design/reference-to-production, context: redesign-restyle}
+  motion-storyboard: {target: design/reference-to-production, context: motion-storyboard}
 
   presentation: {target: presentation/presentation-router, context: general-presentation}
   presentations: {target: presentation/presentation-router, context: general-presentation}
@@ -84,6 +88,8 @@ routing_rules:
   - "Loop repair is bounded; repeated failure without new evidence becomes a blocker."
   - "Use grilling before committing to unresolved product, architecture, design, domain, or workflow decisions."
   - "Use design and presentation routers before specialist visual skills when direction is unresolved."
+  - "Use reference-build for evidence-driven reference-to-production work combining context, forensics, cloning/restyling, variants, motion prototyping, and hardening."
+  - "Use clone-build only when the reference is owned/authorized or the requested fidelity stays within permitted reference use."
   - "Use variants/option-lab only when competing alternatives materially improve the decision."
   - "Always check local/remote collisions before workspace or repository creation."
   - "Load only the smallest useful specialist skill set."

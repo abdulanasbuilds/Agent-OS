@@ -1,5 +1,5 @@
 name: agent-os
-version: 2.6.0
+version: 2.7.0
 purpose: Harness-neutral operating system for disciplined agentic development
 principles:
   - business-problem-first
@@ -31,6 +31,7 @@ principles:
   - token-efficiency
   - plain-language-by-default
   - visible-parallelism-when-useful
+  - adversarial-testing-within-authorized-scope
 core_skills:
   - core/project-context
   - core/planning
@@ -80,6 +81,7 @@ core_skills:
   - security/rls-review
   - security/firebase-security-rules
   - security/permission-bridge
+  - security/adversarial-assessment
   - data/database-design
   - data/postgres
   - data/database-migrations
@@ -183,6 +185,7 @@ agents:
   - tester
   - reviewer
   - security-auditor
+  - red-team-operator
   - ux-reviewer
   - performance-auditor
   - release-manager
@@ -210,3 +213,4 @@ adoption_model:
   autonomous_execution: bounded-by-capability-and-gates
   remote_push_default: denied
   browser_readiness_default: enabled-for-web-work
+  adversarial_testing: authorized-scope-only

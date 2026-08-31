@@ -1,5 +1,5 @@
 name: agent-os
-version: 2.4.0
+version: 2.5.0
 purpose: Harness-neutral operating system for disciplined agentic development
 principles:
   - business-problem-first
@@ -23,6 +23,9 @@ principles:
   - domain-language-before-abstraction
   - smallest-useful-skill
   - personal-preferences-are-local
+  - bounded-autonomy
+  - artifacts-before-memory
+  - approval-before-impact
 core_skills:
   - core/project-context
   - core/planning
@@ -149,6 +152,10 @@ core_skills:
   - presentation/presentation-clone
   - presentation/presentation-reference-analysis
   - personal/personalize
+  - orchestration/autonomous-loop
+  - orchestration/spec-build-review
+  - orchestration/gates
+  - orchestration/run-state
   - business/market-fit
   - operations/observability
   - operations/retro
@@ -164,6 +171,7 @@ agents:
   - ux-reviewer
   - performance-auditor
   - release-manager
+  - orchestrator
 harnesses:
   - pi
   - claude-code
@@ -184,3 +192,4 @@ adoption_model:
   screenshots: reference-only-unless-rights-cleared
   upstream_skill_packs: doctrine-extraction-only
   personal_profile: local-only
+  autonomous_execution: bounded-by-capability-and-gates

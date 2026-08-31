@@ -1,5 +1,5 @@
 name: agent-os
-version: 2.3.0
+version: 2.4.0
 purpose: Harness-neutral operating system for disciplined agentic development
 principles:
   - business-problem-first
@@ -22,6 +22,7 @@ principles:
   - vertical-slices-over-horizontal-work
   - domain-language-before-abstraction
   - smallest-useful-skill
+  - personal-preferences-are-local
 core_skills:
   - core/project-context
   - core/planning
@@ -147,6 +148,7 @@ core_skills:
   - presentation/deck-production
   - presentation/presentation-clone
   - presentation/presentation-reference-analysis
+  - personal/personalize
   - business/market-fit
   - operations/observability
   - operations/retro
@@ -173,6 +175,7 @@ references:
   design_policy: docs/DESIGN-REFERENCE-LIBRARY.md
   presentation_policy: global/PRESENTATION-POLICY.md
   engineering_adoption: docs/MATT-POCOCK-ADOPTION.md
+  personal_policy: global/PERSONALIZATION-POLICY.md
 adoption_model:
   third_party_skills: curated-reference-only
   executable_plugins: opt-in-after-review
@@ -180,3 +183,4 @@ adoption_model:
   external_assets: provenance-required
   screenshots: reference-only-unless-rights-cleared
   upstream_skill_packs: doctrine-extraction-only
+  personal_profile: local-only

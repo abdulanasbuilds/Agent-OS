@@ -1,5 +1,5 @@
 name: agent-os
-version: 2.5.0
+version: 2.6.0
 purpose: Harness-neutral operating system for disciplined agentic development
 principles:
   - business-problem-first
@@ -125,6 +125,7 @@ core_skills:
   - design/visual-search
   - design/asset-provenance
   - design/clone-reference
+  - design/reference-to-production
   - design/component-sourcing
   - design/design-stack-selection
   - design/design-business-analysis

@@ -42,6 +42,7 @@ core_skills:
   - engineering/domain-modeling
   - engineering/codebase-design
   - engineering/wayfinder
+  - engineering/handoff
   - engineering/tdd
   - engineering/to-spec
   - engineering/to-tickets

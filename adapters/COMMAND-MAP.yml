@@ -13,7 +13,8 @@ aliases:
   review: {target: engineering/code-review, context: diff-review}
   triage: {target: engineering/triage, context: incoming-work}
   diagnose: {target: engineering/diagnosing-bugs, context: bug-investigation}
-  handoff: {target: core/context-hygiene, context: context-transition}
+  handoff: {target: engineering/handoff, context: context-transition}
+  context-hygiene: {target: core/context-hygiene, context: context-management}
   tdd: {target: engineering/tdd, context: behavior-driven-development}
   resolve-conflicts: {target: engineering/resolving-merge-conflicts, context: git-conflict}
   git-guardrails: {target: engineering/git-guardrails, context: git-safety}
@@ -62,12 +63,12 @@ routing_rules:
   - "Use ask as the general router when the user describes a situation without naming a skill."
   - "Use grilling before committing to unresolved product, architecture, design, domain, or workflow decisions."
   - "Use domain-modeling before abstractions when project terminology is fuzzy or overloaded."
-  - "Use wayfinder only for genuinely large or uncertain work; keep the map bounded and resolve promises rather than mechanisms."
+  - "Use wayfinder only for genuinely large or uncertain work; keep maps bounded and resolve promises rather than mechanisms."
   - "Use to-spec only after decisions are sufficiently settled; do not re-interview from scratch."
   - "Use to-tickets for independently verifiable vertical slices with explicit dependencies and human checkpoints."
-  - "Use implement for one approved slice and let it invoke TDD/review/security as appropriate."
+  - "Use implement for one approved slice and load TDD/review/security as appropriate."
   - "Use code-review as a gate, not as permission to merge or deploy."
-  - "Use diagnosing-bugs for evidence-first defect investigation; do not disable safeguards to hide a failure."
+  - "Use diagnosing-bugs for evidence-first defect investigation; never disable safeguards to hide a failure."
   - "Use context-hygiene before crossing a context/session/harness boundary."
   - "Use design and presentation routers before specialist visual skills when direction is unresolved."
   - "Use design-variants, presentation-variants, or option-lab only when competing options materially improve the decision."
@@ -86,7 +87,7 @@ harnesses:
     skill_path_priority: [~/.codex/skills, .codex/skills, ~/.agents/skills, .agents/skills]
     invocation: "Harness-dependent"
   opencode:
-    skill_path_priority: [~/.config/opencode/skills, .opencode/skills, ~/.claude/skills, .claude/skills, ~/.agents/skills]
+    skill_path_priority: [~/.config/opencode/skills, .opencode/skills, ~/.claude/skills, ~/.agents/skills]
     invocation: "Native skill system"
 
 portable_directory_rule:

@@ -115,10 +115,14 @@ def check_command_targets() -> None:
     for line in text.splitlines():
         if "target:" not in line:
             continue
-        target = line.split("target:", 1)[1].strip().split(",", 1)[0].strip().strip("{} ")
+        target = line.split("target:", 1)[1].strip().split(",", 1)[0].strip().strip("{} \"'")
         if not target:
             continue
-        matches = list((ROOT / "skills").glob(f"*/{target}/SKILL.md"))
+        if "/" in target:
+            expected = ROOT / "skills" / target / "SKILL.md"
+            matches = [expected] if expected.is_file() else []
+        else:
+            matches = list((ROOT / "skills").glob(f"*/{target}/SKILL.md"))
         if not matches:
             fail(f"command target missing: {target}")
 

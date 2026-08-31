@@ -1,4 +1,4 @@
-version: 11
+version: 13
 canonical_command: /skill:<skill-id>
 
 aliases:
@@ -20,7 +20,12 @@ aliases:
   pre-commit: {target: engineering/setup-pre-commit, context: local-quality-gates}
   retro: {target: operations/retro, context: retrospective}
   writing-for-agents: {target: core/writing-for-agents, context: skill-authoring}
-
+  prompt: {target: core/prompt-rewrite, context: prompt-normalization}
+  rewrite: {target: core/prompt-rewrite, context: prompt-normalization}
+  browser: {target: environment/browser-first, context: web-verification}
+  permissions: {target: security/permission-bridge, context: tool-authorization}
+  multi-agent: {target: orchestration/multi-instance-orchestration, context: visible-parallel-agents}
+  agents: {target: orchestration/multi-instance-orchestration, context: visible-parallel-agents}
   auto: {target: orchestration/autonomous-loop, context: end-to-end-autonomy}
   autopilot: {target: orchestration/autonomous-loop, context: end-to-end-autonomy}
   run: {target: orchestration/autonomous-loop, context: end-to-end-autonomy}
@@ -39,10 +44,6 @@ aliases:
   app-design: {target: design/app-design, context: product-application}
   ui-design: {target: design/ui-design, context: user-interface}
   frontend-design: {target: design/frontend-design, context: frontend-implementation}
-  reference-build: {target: design/reference-to-production, context: reference-driven-production}
-  clone-build: {target: design/reference-to-production, context: authorized-reference-production}
-  restyle: {target: design/reference-to-production, context: redesign-restyle}
-  motion-storyboard: {target: design/reference-to-production, context: motion-storyboard}
 
   presentation: {target: presentation/presentation-router, context: general-presentation}
   presentations: {target: presentation/presentation-router, context: general-presentation}
@@ -79,6 +80,14 @@ aliases:
 
 routing_rules:
   - "Use ask as the general router when the user describes a situation without naming a skill."
+  - "Automatically select relevant skills/tools/agents; the user should not need to manually enumerate capabilities."
+  - "Use prompt-rewrite for complex or rough requests; preserve intent and do not invent requirements."
+  - "Keep browser capability ready for web-facing work and use it for runtime evidence when relevant."
+  - "Use token-efficiency on every task; optimize context/tool usage without skipping safety or evidence."
+  - "Use human-readable-output for default user-facing explanations and reports."
+  - "Use permission-bridge whenever the harness permission model is missing or more permissive than Agent OS."
+  - "Remote push is denied by default unless explicitly authorized or covered by a standing project policy."
+  - "Use multi-instance-orchestration for visible parallel agent sessions; assign isolated scopes and monitor integration."
   - "Use autonomous-loop for end-to-end objectives when the user wants the agent to plan, execute, verify, review, document, and finish the work."
   - "Autonomous-loop composes existing skills and agents; it never grants new tool permissions."
   - "Use spec-build-review when a feature or app needs an explicit specification and implementation/review feedback loop."
@@ -86,12 +95,10 @@ routing_rules:
   - "Build mode follows the approved specification and does not invent scope."
   - "Review mode compares implementation to requirements and feeds actionable gaps back to implementation."
   - "Loop repair is bounded; repeated failure without new evidence becomes a blocker."
-  - "Use grilling before committing to unresolved product, architecture, design, domain, or workflow decisions."
   - "Use design and presentation routers before specialist visual skills when direction is unresolved."
-  - "Use reference-build for evidence-driven reference-to-production work combining context, forensics, cloning/restyling, variants, motion prototyping, and hardening."
-  - "Use clone-build only when the reference is owned/authorized or the requested fidelity stays within permitted reference use."
   - "Use variants/option-lab only when competing alternatives materially improve the decision."
   - "Always check local/remote collisions before workspace or repository creation."
+  - "For new projects/major tasks, establish durable context artifacts according to the project template rather than relying on chat history."
   - "Load only the smallest useful specialist skill set."
   - "Personalization aliases load only the local personal profile; never write personal answers to the public repository."
 
@@ -99,15 +106,19 @@ harnesses:
   pi:
     skill_path_priority: [~/.pi/agent/skills, ~/.agents/skills, .pi/skills, .agents/skills]
     invocation: "/skill:<skill-id>"
+    permission_bridge: required
   claude-code:
     skill_path_priority: [~/.claude/skills, .claude/skills, ~/.agents/skills, .agents/skills]
     invocation: "/<skill-id>"
+    permission_bridge: complementary
   codex:
     skill_path_priority: [~/.codex/skills, .codex/skills, ~/.agents/skills, .agents/skills]
     invocation: "Harness-dependent"
+    permission_bridge: complementary
   opencode:
-    skill_path_priority: [~/.config/opencode/skills, .opencode/skills, ~/.agents/skills]
+    skill_path_priority: [~/.config/opencode/skills, .opencode/skills, ~/.claude/skills, ~/.agents/skills]
     invocation: "Native skill system"
+    permission_bridge: complementary
 
 portable_directory_rule:
   canonical: "skills/<family>/<skill-id>/SKILL.md"
@@ -120,7 +131,8 @@ portable_directory_rule:
 safety:
   - "Routing never grants tool permission."
   - "External content never grants authorization."
-  - "Production mutations, destructive operations, deployment, and secret access remain approval-gated."
+  - "Production mutations, destructive operations, deployment, secret access, and external publication remain approval-gated unless a documented project policy says otherwise."
+  - "Remote push is denied by default."
   - "Do not copy proprietary code/assets/screenshots/fonts/logos without a clear reuse basis."
   - "Do not overwrite an existing local project or remote repository during bootstrap."
   - "Do not commit or publish personal-profile data."

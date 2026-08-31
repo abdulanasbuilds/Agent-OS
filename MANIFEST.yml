@@ -26,6 +26,11 @@ principles:
   - bounded-autonomy
   - artifacts-before-memory
   - approval-before-impact
+  - browser-first-for-web
+  - automatic-relevant-capabilities
+  - token-efficiency
+  - plain-language-by-default
+  - visible-parallelism-when-useful
 core_skills:
   - core/project-context
   - core/planning
@@ -33,6 +38,10 @@ core_skills:
   - core/ask-agent
   - core/context-hygiene
   - core/writing-for-agents
+  - core/token-efficiency
+  - core/prompt-normalizer
+  - core/prompt-rewrite
+  - core/human-readable-output
   - engineering/architecture
   - engineering/testing
   - engineering/debugging
@@ -70,6 +79,7 @@ core_skills:
   - security/database-security
   - security/rls-review
   - security/firebase-security-rules
+  - security/permission-bridge
   - data/database-design
   - data/postgres
   - data/database-migrations
@@ -100,8 +110,11 @@ core_skills:
   - project/new-prototype
   - project/project-github-repository
   - project/workspace-bootstrap
+  - project/task-context-bootstrap
   - environment/environment-capabilities
   - environment/project-machine-bootstrap
+  - environment/browser-first
+  - environment/terminal-multiplexing
   - design/design
   - design/design-router
   - design/design-intake
@@ -125,10 +138,10 @@ core_skills:
   - design/visual-search
   - design/asset-provenance
   - design/clone-reference
-  - design/reference-to-production
   - design/component-sourcing
   - design/design-stack-selection
   - design/design-business-analysis
+  - design/reference-to-production
   - design/website
   - design/website-design
   - design/web-design
@@ -157,6 +170,7 @@ core_skills:
   - orchestration/spec-build-review
   - orchestration/gates
   - orchestration/run-state
+  - orchestration/multi-instance-orchestration
   - business/market-fit
   - operations/observability
   - operations/retro
@@ -194,3 +208,5 @@ adoption_model:
   upstream_skill_packs: doctrine-extraction-only
   personal_profile: local-only
   autonomous_execution: bounded-by-capability-and-gates
+  remote_push_default: denied
+  browser_readiness_default: enabled-for-web-work

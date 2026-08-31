@@ -1,6 +1,6 @@
 name: agent-os
-version: 2.1.0
-purpose: Harness-neutral operating system for agentic development
+version: 2.3.0
+purpose: Harness-neutral operating system for disciplined agentic development
 principles:
   - business-problem-first
   - evidence-before-confidence
@@ -18,10 +18,17 @@ principles:
   - capability-before-claim
   - explore-in-isolation
   - select-before-promotion
+  - explicit-context-boundaries
+  - vertical-slices-over-horizontal-work
+  - domain-language-before-abstraction
+  - smallest-useful-skill
 core_skills:
   - core/project-context
   - core/planning
   - core/option-lab
+  - core/ask-agent
+  - core/context-hygiene
+  - core/writing-for-agents
   - engineering/architecture
   - engineering/testing
   - engineering/debugging
@@ -31,6 +38,20 @@ core_skills:
   - engineering/performance
   - engineering/api-design
   - engineering/accessibility
+  - engineering/grilling
+  - engineering/domain-modeling
+  - engineering/codebase-design
+  - engineering/wayfinder
+  - engineering/tdd
+  - engineering/to-spec
+  - engineering/to-tickets
+  - engineering/implement
+  - engineering/code-review
+  - engineering/triage
+  - engineering/diagnosing-bugs
+  - engineering/resolving-merge-conflicts
+  - engineering/git-guardrails
+  - engineering/setup-pre-commit
   - research/research
   - research/documentation
   - research/evidence
@@ -127,6 +148,7 @@ core_skills:
   - presentation/presentation-reference-analysis
   - business/market-fit
   - operations/observability
+  - operations/retro
 agents:
   - planner
   - researcher
@@ -149,9 +171,11 @@ references:
   presentation_catalog: references/PRESENTATION-REFERENCE-CATALOG.yml
   design_policy: docs/DESIGN-REFERENCE-LIBRARY.md
   presentation_policy: global/PRESENTATION-POLICY.md
+  engineering_adoption: docs/MATT-POCOCK-ADOPTION.md
 adoption_model:
   third_party_skills: curated-reference-only
   executable_plugins: opt-in-after-review
   production_mutations: explicit-authorization
   external_assets: provenance-required
   screenshots: reference-only-unless-rights-cleared
+  upstream_skill_packs: doctrine-extraction-only

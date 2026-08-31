@@ -1,4 +1,4 @@
-version: 8
+version: 10
 canonical_command: /skill:<skill-id>
 
 aliases:
@@ -7,10 +7,9 @@ aliases:
   grill: {target: engineering/grilling, context: decision-interview}
   domain: {target: engineering/domain-modeling, context: domain-language}
   wayfind: {target: engineering/wayfinder, context: large-uncertain-work}
-  spec: {target: engineering/to-spec, context: specification}
-  tickets: {target: engineering/to-tickets, context: vertical-slice-planning}
-  implement: {target: engineering/implement, context: approved-work}
-  review: {target: engineering/code-review, context: diff-review}
+  spec: {target: orchestration/spec-build-review, context: specification-loop}
+  build: {target: engineering/implement, context: approved-spec-implementation}
+  review: {target: engineering/code-review, context: diff-and-spec-review}
   triage: {target: engineering/triage, context: incoming-work}
   diagnose: {target: engineering/diagnosing-bugs, context: bug-investigation}
   handoff: {target: engineering/handoff, context: context-transition}
@@ -21,6 +20,15 @@ aliases:
   pre-commit: {target: engineering/setup-pre-commit, context: local-quality-gates}
   retro: {target: operations/retro, context: retrospective}
   writing-for-agents: {target: core/writing-for-agents, context: skill-authoring}
+
+  auto: {target: orchestration/autonomous-loop, context: end-to-end-autonomy}
+  autopilot: {target: orchestration/autonomous-loop, context: end-to-end-autonomy}
+  run: {target: orchestration/autonomous-loop, context: end-to-end-autonomy}
+  execute: {target: orchestration/autonomous-loop, context: end-to-end-autonomy}
+  autonomous: {target: orchestration/autonomous-loop, context: end-to-end-autonomy}
+  spec-loop: {target: orchestration/spec-build-review, context: specification-loop}
+  build-loop: {target: orchestration/spec-build-review, context: implementation-loop}
+  review-loop: {target: orchestration/spec-build-review, context: review-loop}
 
   design: {target: design/design-router, context: general-design}
   website: {target: design/website, context: public-website}
@@ -67,18 +75,16 @@ aliases:
 
 routing_rules:
   - "Use ask as the general router when the user describes a situation without naming a skill."
+  - "Use autonomous-loop for end-to-end objectives when the user wants the agent to plan, execute, verify, review, document, and finish the work."
+  - "Autonomous-loop composes existing skills and agents; it never grants new tool permissions."
+  - "Use spec-build-review when a feature or app needs an explicit specification and implementation/review feedback loop."
+  - "Spec mode interviews until requirements and acceptance criteria are sufficiently explicit; do not build during the interview."
+  - "Build mode follows the approved specification and does not invent scope."
+  - "Review mode compares implementation to requirements and feeds actionable gaps back to implementation."
+  - "Loop repair is bounded; repeated failure without new evidence becomes a blocker."
   - "Use grilling before committing to unresolved product, architecture, design, domain, or workflow decisions."
-  - "Use domain-modeling before abstractions when project terminology is fuzzy or overloaded."
-  - "Use wayfinder only for genuinely large or uncertain work; keep maps bounded."
-  - "Use to-spec only after decisions are sufficiently settled."
-  - "Use to-tickets for independently verifiable vertical slices with explicit dependencies and human checkpoints."
-  - "Use implement for one approved slice and load TDD/review/security as appropriate."
-  - "Use code-review as a gate, not as permission to merge or deploy."
-  - "Use diagnosing-bugs for evidence-first defect investigation."
-  - "Use context-hygiene before crossing a context/session/harness boundary."
   - "Use design and presentation routers before specialist visual skills when direction is unresolved."
-  - "Use design-variants, presentation-variants, or option-lab only when competing options materially improve the decision."
-  - "New-work aliases load project-lifecycle and project-type context; do not duplicate lifecycle methodology."
+  - "Use variants/option-lab only when competing alternatives materially improve the decision."
   - "Always check local/remote collisions before workspace or repository creation."
   - "Load only the smallest useful specialist skill set."
   - "Personalization aliases load only the local personal profile; never write personal answers to the public repository."
@@ -94,7 +100,7 @@ harnesses:
     skill_path_priority: [~/.codex/skills, .codex/skills, ~/.agents/skills, .agents/skills]
     invocation: "Harness-dependent"
   opencode:
-    skill_path_priority: [~/.config/opencode/skills, .opencode/skills, ~/.claude/skills, ~/.agents/skills]
+    skill_path_priority: [~/.config/opencode/skills, .opencode/skills, ~/.agents/skills]
     invocation: "Native skill system"
 
 portable_directory_rule:

@@ -12,16 +12,19 @@ The lab exists to prevent unapproved visual experiments from contaminating the p
 
 ## Default flow
 
-1. Complete enough design/business intake to establish the product goal, audience, content, functional requirements, constraints, and relevant references.
-2. Freeze the shared functional contract so every variant solves the same problem.
-3. Create a disposable local branch/worktree or isolated preview workspace for each materially different direction.
-4. Build 2-4 variants only when the decision is genuinely uncertain or the user requests alternatives. Do not generate variants for trivial changes.
+1. Complete enough design/business intake to establish the product goal, audience, market, content, functional requirements, constraints, and relevant references.
+2. For unresolved high-visibility frontend work, complete the reference-first ladder: Agent OS/project references → relevant template/community ecosystems → live industry/product websites → broader web/image discovery only when necessary.
+3. Analyze the selected references and record source, URL, useful observations, transferable principles, product-specific elements not to copy, licensing/reuse status, and proposed adaptations.
+4. Freeze the shared functional contract so every variant solves the same problem.
+5. Create a disposable local branch/worktree or isolated preview workspace for each materially different direction.
+6. Build 2-4 variants only when the decision is genuinely uncertain or the user requests alternatives. Do not generate variants for trivial changes. Each variant must be a meaningful design hypothesis, not a cosmetic reskin.
 5. Start each variant with the same project baseline. A variant must not depend on another unfinished variant.
 6. Run each variant locally. For web projects, expose each variant on a unique localhost port or equivalent isolated preview URL. For mobile/desktop projects, use the project's native preview/simulator path and record the exact environment.
 7. Capture deterministic screenshots, key interaction recordings where useful, and a short implementation note for each variant.
 8. Run the same functional, responsive, accessibility, performance, and visual checks against every candidate.
 9. Present the candidates with a consistent comparison rubric.
-10. Wait for an explicit selection when the user is the decision-maker. Do not silently promote a favorite.
+12. Run the anti-AI-slop gate against every candidate and ensure the result is product-specific rather than derivative of a single marketplace/template reference.
+13. Wait for an explicit selection when the user is the decision-maker. Do not silently promote a favorite.
 11. Record the selected direction in the project's design-variant record and decisions log.
 12. Promote only the selected implementation into the primary workspace/branch. Delete or archive discarded experiments according to project policy.
 
@@ -47,6 +50,23 @@ Every variant should report:
 - screenshot/recording paths
 - known limitations
 - cleanup status
+
+## Reference ancestry
+
+Every variant must record:
+- reference source and URL;
+- why the source was selected;
+- observed principle;
+- transferable pattern;
+- product-specific element intentionally not copied;
+- licensing/reuse status;
+- adaptation rationale.
+
+A useful chain is:
+
+SOURCE → OBSERVATION → PRINCIPLE → ADAPTATION
+
+This is evidence of synthesis, not permission to copy.
 
 ## Comparison rubric
 

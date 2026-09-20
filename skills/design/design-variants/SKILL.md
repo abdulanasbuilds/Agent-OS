@@ -26,6 +26,14 @@ Use the Agent OS catalog first, then relevant template/community ecosystems, the
 
 References inform hypotheses. They do not become permission to copy.
 
+## Live comparison contract
+
+When a visual decision benefits from direct interaction, use one full-size variant at a time behind a temporary picker.
+
+The picker is test chrome, not production UI. Keep its structure and visual treatment independent from the project's design system, and remove it after promotion unless the project explicitly keeps it.
+
+The comparison interaction itself should be instant: switching variants is repeated exploration, not a product transition. Animate only the picker feedback if it improves orientation.
+
 ## Workflow
 
 1. Lock the functional requirements and content.

@@ -81,6 +81,7 @@ If the request is a new high-visibility surface and the visual direction is unre
 ### Motion / animation request
 Use:
 `motion-system` → `animation-engineering`
+For terminology or naming-only questions, use `animation-vocabulary` without invoking the implementation workflow.
 Add `interaction-design`, `accessibility`, and `performance` when relevant.
 
 ### Reference-driven design

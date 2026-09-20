@@ -21,6 +21,20 @@ Review the actual rendered interface when possible, not only source code.
 11. Accessibility
 12. Performance and layout stability
 
+## Motion review output
+
+When motion is a material part of the review, include motion findings in the same evidence table and identify the exact property/value that is wrong.
+
+Use these impact buckets when useful:
+1. **Feel-breaking** — slow or wrong response, inappropriate high-frequency animation, bad easing, or a visible origin/jump problem.
+2. **Simplification** — motion that should be removed or drastically reduced.
+3. **Performance** — layout animation, thrashing, expensive effects, or avoidable main-thread work.
+4. **Interruptibility** — motion that restarts instead of retargeting, or gestures that lose velocity.
+5. **Accessibility** — missing reduced-motion or hover gating.
+6. **Cohesion** — motion language that conflicts with the product's established character.
+
+When a finding depends on a subjective feel that cannot be established from source alone, label the uncertainty and request rendered/browser evidence rather than pretending the code proves it.
+
 ## Anti-slop review
 Flag interfaces whose strongest visual identity comes from fashionable effects rather than product-specific decisions. Look for generic hero formulas, excessive cards, arbitrary gradients, ornamental blur/glow, over-animation, and weak information hierarchy.
 

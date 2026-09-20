@@ -31,3 +31,49 @@ Inspect frame behavior, layout shift, CPU/GPU cost, battery impact on mobile whe
 - Anime.js: https://animejs.com/
 - Lenis: https://lenis.dev/
 - Three.js: https://threejs.org/
+
+
+## High-value recipes
+
+Use these as starting patterns; adapt them to the project's existing tokens and component system.
+
+### CSS press feedback
+```css
+.button {
+  transition: transform 160ms ease-out;
+}
+.button:active {
+  transform: scale(0.97);
+}
+```
+
+### Entry without `scale(0)`
+```css
+.surface {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 180ms cubic-bezier(0.23, 1, 0.32, 1),
+              transform 180ms cubic-bezier(0.23, 1, 0.32, 1);
+  @starting-style {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+```
+
+### Trigger-aware surface
+When a component exposes a reliable trigger-origin value, set `transform-origin` from that value rather than forcing every anchored surface to originate from center. Keep centered modals centered.
+
+### Dynamic UI
+For toasts, toggles, and other rapidly repeated state changes, prefer transitions or springs that can retarget. Avoid keyframes that restart from zero when interruption is possible.
+
+### Stagger
+Keep group-entry delays short, roughly 30–80ms. Never make the UI wait for the entire stagger sequence before accepting input.
+
+### Blur bridge
+For a crossfade that visually double-exposes two states, test a subtle `blur(2px)` during the transition rather than stacking heavier opacity tricks. Keep expensive filters restrained and verify on realistic devices.
+
+## Engineering caveat
+
+Do not freeze library-specific rendering claims as universal truths. For Motion, GSAP, browser APIs, and other libraries, verify current behavior against the current installed version and actual runtime traces. The durable rule is to prefer the simplest mechanism that stays smooth, interruptible, accessible, and maintainable.
+

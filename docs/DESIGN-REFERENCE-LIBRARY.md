@@ -33,18 +33,36 @@ Every shipped external asset is recorded in `ASSET-REGISTER.md` with source and 
 
 ## Search behavior
 
-When the user asks for a design:
-1. Determine the product/business/audience context.
-2. Search the reference catalog for relevant sources.
-3. Use current web/image/source tools available to the harness.
-4. Prefer several high-signal references over a giant moodboard.
-5. Extract principles: hierarchy, typography, spacing, imagery, interaction, motion, component behavior.
-6. Separate references from assets cleared for use.
-7. Save only project-relevant references.
+When the user asks for a new or high-visibility design:
+1. Determine the product/business/audience/market context and primary design question.
+2. Search the reference catalog and project-owned references first.
+3. Search relevant template/community ecosystems when they can answer the design question.
+4. Search current live industry/product websites, including relevant geography/market and comparable user journeys.
+5. Use broader web/image/source tools only when the higher-signal tiers do not answer the question.
+6. Prefer a small, diverse, high-signal reference set over a large moodboard.
+7. Extract principles: hierarchy, typography, spacing, imagery, interaction, motion, component behavior, responsiveness.
+8. Build a synthesis chain: SOURCE → OBSERVATION → PRINCIPLE → ADAPTATION.
+9. Separate research references from assets/templates cleared for direct reuse.
+10. Save only project-relevant references.
+
+## Reference-first variant research
+
+For unresolved high-visibility frontend work, reference research should happen before design variants are invented.
+
+Each variant should be traceable to the research through a compact reference ancestry record:
+- source and URL;
+- why it was selected;
+- observed principle;
+- transferable pattern;
+- product-specific element intentionally not copied;
+- licensing/reuse status;
+- adaptation rationale.
+
+Multiple independent source categories are preferred when practical. One external source should not dictate the entire visual direction unless it is project-owned or explicitly authorized.
 
 ## Images and screenshots
 
-A screenshot can be evidence for analysis without being licensed as a reusable asset. Do not automatically ship screenshots from galleries or competitors.
+A screenshot can be evidence for analysis without being licensed as a reusable asset. Do not automatically ship screenshots from galleries, marketplaces, community resources, competitors, or live sites.
 
 For asset sources, record the exact asset URL and current license page. Avoid assets containing trademarks, identifiable people, artwork, or other rights-sensitive material when the intended usage could require additional permission.
 

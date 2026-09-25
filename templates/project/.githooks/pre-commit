@@ -1,0 +1,24 @@
+#!/bin/sh
+set -eu
+
+PROJECT_ROOT="$(git rev-parse --show-toplevel)"
+SCOPE_FILE="$PROJECT_ROOT/.agent-os/project-scope.yml"
+
+if [ ! -f "$SCOPE_FILE" ]; then
+  echo "Agent OS boundary: BLOCKED — missing .agent-os/project-scope.yml"
+  exit 1
+fi
+
+SCOPE_ROOT="$(dirname "$(dirname "$SCOPE_FILE")")"
+
+case "$(cd "$PROJECT_ROOT" && pwd -P)" in
+  "$(cd "$SCOPE_ROOT" && pwd -P)") ;;
+  *)
+    echo "Agent OS boundary: BLOCKED — Git root is not the project root."
+    echo "Git root: $PROJECT_ROOT"
+    echo "Project root: $SCOPE_ROOT"
+    exit 1
+    ;;
+esac
+
+echo "Agent OS boundary: OK"

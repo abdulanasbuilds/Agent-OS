@@ -34,7 +34,7 @@ Resolve it in this order:
 1. Current working directory, if it is already inside a project.
 2. A project explicitly named by the user.
 3. A project found by searching configured workspace roots.
-4. A newly requested project created under the requested configured category.
+4. For new work, resolve category selection before any creation.
 
 A category/container folder containing multiple projects is NOT a valid active project for implementation work.
 
@@ -78,14 +78,17 @@ Examples:
 
 The agent should resolve those requests against configured workspace roots.
 
-For creation:
+For NEW PROJECT creation:
 
-1. Select the requested category.
-2. Sanitize the project slug.
-3. Check for local collisions.
-4. Create only the requested project directory.
-5. Initialize the project scope manifest and Agent OS project files.
-6. Do not create another top-level workspace container unless explicitly requested.
+1. Inspect actual/configured categories.
+2. Ask the user which category should contain the project unless they already specified it.
+3. Never invent a category from documentation examples.
+4. Never create a category automatically.
+5. Only after category selection, sanitize the project slug and check for local collisions.
+6. Create only the requested project directory.
+7. Initialize the project scope manifest and Agent OS project files.
+8. Never create unrelated top-level categories or sample projects.
+9. Existing projects are never moved merely to satisfy Agent OS.
 
 ## 6. Git boundary
 
@@ -158,7 +161,7 @@ When asked to create a project:
 
 ## 10. Protected containers
 
-Configured category folders such as `Clients` and `My Projects` are organizational containers.
+Configured category folders are organizational containers. Names shown in documentation are examples only and are never treated as real categories unless they actually exist on the user's machine or are explicitly configured.
 
 The agent must not:
 

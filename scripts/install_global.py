@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
-"""Install Agent OS global instructions and workspace configuration for supported coding harnesses."""
+"""Install Agent OS global instructions and a user-owned workspace configuration."""
 
 from __future__ import annotations
 
 import argparse
 import os
 from pathlib import Path
-from typing import Iterable
 
 BEGIN = "<!-- BEGIN AGENT OS MANAGED BLOCK -->"
 END = "<!-- END AGENT OS MANAGED BLOCK -->"
@@ -19,14 +18,23 @@ TARGETS = {
     "shared": Path("~/.agents/AGENTS.md"),
 }
 
-WORKSPACE_CONFIG = """version: 1
-workspace_roots:
-  clients: ~/Desktop/Clients
-  projects: ~/Desktop/My Projects
-  open_source: ~/Desktop/Open Source
-  learning: ~/Desktop/Learning
-  experiments: ~/Desktop/Experiments
-  personal: ~/Desktop/Personal
+WORKSPACE_CONFIG = """version: 2
+
+# Agent OS does not invent, rename, or create categories automatically.
+# Add only the category containers you actually use.
+#
+# Example shape only:
+# workspace_roots:
+#   - name: Your Category
+#     path: ~/Desktop/Your Category
+#
+workspace_roots: []
+
+policy:
+  ask_for_category_on_new_project: true
+  create_categories_automatically: false
+  do_not_reorganize_existing_projects: true
+  discover_existing_projects: true
 """
 
 
@@ -72,7 +80,7 @@ def main() -> int:
     parser.add_argument(
         "--no-workspace-config",
         action="store_true",
-        help="Do not create the default workspace configuration.",
+        help="Do not create the workspace configuration.",
     )
     args = parser.parse_args()
 
@@ -83,8 +91,6 @@ def main() -> int:
 
     canonical = canonical_path.read_text(encoding="utf-8")
 
-    # Keep a canonical local copy so global runtime files are reproducible
-    # even when the Git checkout moves later.
     local_canonical = Path.home() / ".agent-os" / "global" / "AGENTS.md"
     local_canonical.parent.mkdir(parents=True, exist_ok=True)
     local_canonical.write_text(canonical, encoding="utf-8")
@@ -105,6 +111,7 @@ def main() -> int:
         print(f"  - {expand(target)}")
     if not args.no_workspace_config:
         print(f"Workspace config: {Path.home() / '.agent-os' / 'workspace.yml'}")
+        print("No categories or projects were created.")
     return 0
 
 

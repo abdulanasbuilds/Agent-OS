@@ -20,7 +20,7 @@ REQUIRED_FILES = [
     "global/WORKSPACE-GOVERNANCE.md", "global/SECURITY.md",
     "global/TOOL-POLICY.md", "global/EVIDENCE-POLICY.md",
     "global/MEMORY-POLICY.md", "global/MODEL-ROUTING.md",
-    "global/SKILL-ROUTING.md", "docs/SKILL-SPEC.md",
+    "global/SKILL-ROUTING.md", "global/SKILL-HIERARCHY.md", "docs/SKILL-SPEC.md",
     "docs/HARNESS-INTEROPERABILITY.md", "docs/SECURITY-AND-ADOPTION.md",
     "adapters/COMMAND-MAP.yml", "scripts/install_global.py",
     "scripts/check_project_boundary.py",

@@ -1,0 +1,33 @@
+version: 1
+kind: agent-os-project-scope
+
+# Human-readable category containing this project.
+category: client
+
+# Stable project identifier. Use lowercase kebab-case.
+slug: replace-me
+
+# Display name is optional and may contain spaces.
+name: Replace Me
+
+# The scope file lives at the project root.
+project_root: "."
+
+# Git policy.
+git:
+  repository_root: "."
+  allow_monorepo: false
+  remote: null
+
+# Agents may read outside the project to locate this project,
+# but implementation writes remain inside project_root.
+boundary:
+  write_scope: project-root-only
+  sibling_projects: read-only-for-resolution
+  parent_containers: no-implementation-writes
+
+# Parallel-agent policy.
+parallel:
+  shared_worktree_writes: false
+  preferred_strategy: separate-worktree-per-agent
+  remote_push_by_workers: false

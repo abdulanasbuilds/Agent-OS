@@ -1,9 +1,12 @@
-version: 14
+version: 15
 canonical_command: /skill:<skill-id>
 
 aliases:
   ask: {target: core/ask-agent, context: routing}
   plan: {target: core/planning, context: planning}
+  workspace: {target: core/workspace-boundary, context: project-and-git-boundary}
+  scope: {target: core/workspace-boundary, context: project-and-git-boundary}
+  boundary: {target: core/workspace-boundary, context: project-and-git-boundary}
   grill: {target: engineering/grilling, context: decision-interview}
   domain: {target: engineering/domain-modeling, context: domain-language}
   wayfind: {target: engineering/wayfinder, context: large-uncertain-work}
@@ -84,6 +87,9 @@ aliases:
 routing_rules:
   - "Use ask as the general router when the user describes a situation without naming a skill."
   - "Automatically select relevant skills/tools/agents; the user should not need to manually enumerate capabilities."
+  - "Always establish the active project boundary before implementation or Git mutation."
+  - "Never treat a multi-project category folder as an implementation workspace."
+  - "Use workspace-boundary for project discovery, project resolution, cross-project protection, and Git-root binding."
   - "Use prompt-rewrite for complex or rough requests; preserve intent and do not invent requirements."
   - "Keep browser capability ready for web-facing work and use it for runtime evidence when relevant."
   - "Use token-efficiency on every task; optimize context/tool usage without skipping safety or evidence."

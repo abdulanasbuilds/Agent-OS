@@ -1,5 +1,5 @@
 name: agent-os
-version: 2.7.0
+version: 2.8.0
 purpose: Harness-neutral operating system for disciplined agentic development
 principles:
   - business-problem-first
@@ -19,6 +19,8 @@ principles:
   - explore-in-isolation
   - select-before-promotion
   - explicit-context-boundaries
+  - strict-project-boundaries
+  - git-root-must-match-project-root
   - vertical-slices-over-horizontal-work
   - domain-language-before-abstraction
   - smallest-useful-skill
@@ -43,6 +45,7 @@ core_skills:
   - core/prompt-normalizer
   - core/prompt-rewrite
   - core/human-readable-output
+  - core/workspace-boundary
   - engineering/architecture
   - engineering/testing
   - engineering/debugging

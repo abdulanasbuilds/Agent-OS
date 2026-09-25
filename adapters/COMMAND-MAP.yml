@@ -1,7 +1,21 @@
-version: 15
+version: 16
 canonical_command: /skill:<skill-id>
 
 aliases:
+  core: {target: core/parent-router, context: core-family}
+  engineering: {target: core/parent-router, context: engineering-family}
+  research: {target: core/parent-router, context: research-family}
+  security: {target: core/parent-router, context: security-family}
+  data: {target: core/parent-router, context: data-family}
+  platform: {target: core/parent-router, context: platform-family}
+  media: {target: core/parent-router, context: media-family}
+  product: {target: core/parent-router, context: product-family}
+  project: {target: project/project-new-type-router, context: project-family}
+  environment: {target: core/parent-router, context: environment-family}
+  personal: {target: core/parent-router, context: personal-family}
+  orchestration: {target: core/parent-router, context: orchestration-family}
+  business: {target: core/parent-router, context: business-family}
+  operations: {target: core/parent-router, context: operations-family}
   ask: {target: core/ask-agent, context: routing}
   plan: {target: core/planning, context: planning}
   workspace: {target: core/workspace-boundary, context: project-and-git-boundary}

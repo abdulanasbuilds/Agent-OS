@@ -1,5 +1,5 @@
 name: agent-os
-version: 2.8.0
+version: 2.9.0
 purpose: Harness-neutral operating system for disciplined agentic development
 principles:
   - business-problem-first
@@ -46,6 +46,7 @@ core_skills:
   - core/prompt-rewrite
   - core/human-readable-output
   - core/workspace-boundary
+  - core/parent-router
   - engineering/architecture
   - engineering/testing
   - engineering/debugging

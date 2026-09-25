@@ -28,16 +28,17 @@ Natural aliases should route here rather than duplicate this workflow.
 Before changing anything:
 
 1. Identify current working directory and safe parent directory.
-2. Check whether a project with the requested slug already exists locally.
-3. Check whether the intended GitHub repository already exists.
-4. Detect installed `git` and `gh` capabilities when available.
-5. Load global Agent OS rules and relevant provider/design/business skills.
+2. Load the Agent OS workspace configuration when available.
+3. Check whether a project with the requested name or slug already exists under configured workspace roots.
+4. Check whether the intended GitHub repository already exists.
+5. Detect installed git and gh capabilities when available.
+6. Load global Agent OS rules and relevant provider, design, and business skills.
 
 Never overwrite an existing directory or repository. Stop and report the collision.
 
 ## Phase 1 — intake
 
-Ask only questions that materially change the project. Use `project-intake` and select the relevant profile:
+Ask only questions that materially change the project. Use project-intake and select the relevant profile:
 
 - product/app
 - client
@@ -70,15 +71,16 @@ Do not manufacture answers. Mark unknowns explicitly.
 
 Before code, create or fill:
 
-- `PROJECT.md`
-- `ARCHITECTURE.md`
-- `SECURITY.md`
-- `DECISIONS.md`
-- `TASKS.md`
-- `CHANGELOG.md`
+- PROJECT.md
+- ARCHITECTURE.md
+- SECURITY.md
+- DECISIONS.md
+- TASKS.md
+- CHANGELOG.md
+- .agent-os/project-scope.yml
 - relevant design/business/reference documents
 
-Select only the skills needed for this project.
+The scope manifest must identify the category, project slug, project root, and Git boundary.
 
 ## Phase 3 — plan
 
@@ -102,27 +104,42 @@ Create the project directory from the Agent OS project template and initialize G
 
 The generated workspace must inherit the canonical Agent OS instructions and only the project-specific material should be customized.
 
-Use a safe path and a kebab-case slug. Never derive a shell path directly from raw user text without sanitization.
+Use a configured category root and a safe kebab-case project slug. Never derive a shell path directly from raw user text without sanitization.
+
+The normal boundary is:
+
+category container / project folder / project files
+
+The category folder must never become the Git repository for ordinary single-project work.
+
+After Git initialization, install the Agent OS boundary hook and set the repository local core.hooksPath to the project-managed hook directory.
 
 ## Phase 5 — create repository
 
-When GitHub CLI authentication is available, create the remote repository with `gh repo create` using an explicit visibility chosen during intake.
+When GitHub CLI authentication is available, create the remote repository with gh repo create using an explicit visibility chosen during intake.
 
-Default to a private repository for client/proprietary work unless the user explicitly chooses public.
+Default to a private repository for client or proprietary work unless the user explicitly chooses public.
 
 Never:
 
 - overwrite another repository
 - expose secrets in repository metadata
-- commit `.env` files or credentials
+- commit .env files or credentials
 - use a guessed owner
 - create a public repository merely because visibility was unspecified
+- attach a project to a remote belonging to another project
 
 If GitHub CLI is unavailable, complete the local project setup and report that remote creation is blocked by the environment rather than pretending it happened.
 
 ## Phase 6 — initial commit
 
-Add the approved project files, run Agent OS validation, then create the initial Git commit.
+Before the first commit:
+
+1. Verify the project root equals the Git repository root.
+2. Verify .agent-os/project-scope.yml exists.
+3. Verify only intended project files are staged.
+4. Run Agent OS validation and relevant project checks.
+5. Create the initial Git commit.
 
 Do not claim repository creation succeeded until the remote exists and the push has been verified.
 
@@ -137,6 +154,10 @@ Return:
 - open questions
 - selected stack
 - next task
+
+## Existing-project retrofit
+
+When an existing project does not yet have the Agent OS scope manifest or boundary hook, add them before continuing with significant autonomous work. Do not move or reorganize the existing project merely to install the boundary system.
 
 ## Safety
 

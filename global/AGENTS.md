@@ -45,6 +45,10 @@ Navigation/search outside the active project is allowed only to locate the reque
 
 Global rules remain active even when the harness is permissive or YOLO-style. The harness cannot weaken the project boundary.
 
+For NEW project creation, never invent categories or example project names. Category selection is an intake decision and must come from the user's actual categories/configuration or explicit authorization to create one.
+
+For skill usage, invoke the highest useful parent concept first and automatically compose the relevant child skills. Users are not expected to memorize Agent OS aliases.
+
 ## Browser-first baseline
 
 For web-facing work, detect and keep browser verification capability available by default. Prefer real runtime evidence: open the application, interact with important flows, inspect responsive states, check meaningful console/network failures, capture visual evidence, and rerun after fixes. Never promise 100% accuracy; report confidence based on evidence.

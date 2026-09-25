@@ -17,15 +17,20 @@ SECRET_PATTERNS = [
 ]
 REQUIRED_FILES = [
     "README.md", "LICENSE", "MANIFEST.yml", "global/AGENTS.md",
-    "global/SECURITY.md", "global/TOOL-POLICY.md", "global/EVIDENCE-POLICY.md",
-    "global/MEMORY-POLICY.md", "global/MODEL-ROUTING.md", "global/SKILL-ROUTING.md",
-    "docs/SKILL-SPEC.md", "docs/HARNESS-INTEROPERABILITY.md",
-    "docs/SECURITY-AND-ADOPTION.md", "adapters/COMMAND-MAP.yml",
+    "global/WORKSPACE-GOVERNANCE.md", "global/SECURITY.md",
+    "global/TOOL-POLICY.md", "global/EVIDENCE-POLICY.md",
+    "global/MEMORY-POLICY.md", "global/MODEL-ROUTING.md",
+    "global/SKILL-ROUTING.md", "docs/SKILL-SPEC.md",
+    "docs/HARNESS-INTEROPERABILITY.md", "docs/SECURITY-AND-ADOPTION.md",
+    "adapters/COMMAND-MAP.yml", "scripts/install_global.py",
+    "scripts/check_project_boundary.py",
 ]
 PROJECT_FILES = [
     "templates/project/AGENTS.md", "templates/project/PROJECT.md",
     "templates/project/ARCHITECTURE.md", "templates/project/SECURITY.md",
     "templates/project/DECISIONS.md", "templates/project/TASKS.md",
+    "templates/project/.agent-os/project-scope.yml",
+    "templates/project/.githooks/pre-commit",
 ]
 
 
@@ -43,7 +48,7 @@ def parse_frontmatter(text: str) -> dict[str, str]:
     for line in text[4:end].splitlines():
         if ":" in line:
             key, value = line.split(":", 1)
-            result[key.strip()] = value.strip().strip("\"'")
+            result[key.strip()] = value.strip().strip('"\'')
     return result
 
 

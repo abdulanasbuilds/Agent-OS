@@ -5,6 +5,11 @@ description: Build distinctive, production-grade frontend interfaces from produc
 
 # Frontend Design
 
+## Canonical reconstruction hand-off
+
+For reference-driven website work, load `skills/design/website-reconstruction/SKILL.md` before implementation. Treat it as the implementation contract for evidence capture, route fidelity, reusable architecture, responsive behavior, asset provenance, motion, white-labeling, deployment, and verification.
+
+
 ## Before coding
 
 - If the request is broad or the visual direction is unresolved, load design-router first.

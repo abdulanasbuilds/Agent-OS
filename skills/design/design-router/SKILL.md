@@ -89,7 +89,7 @@ Use:
 `reference-discovery` → `visual-reference-analysis` → `design-direction` → relevant implementation skills.
 
 ### Clone / faithful recreation
-Use `clone-reference`. First determine ownership/authorization. For third-party work without permission, analyze and recreate principles rather than copying protected assets, code, or branding wholesale.
+Use `website-reconstruction` → `clone-reference`. First determine ownership/authorization. For third-party work without permission, analyze and recreate principles rather than copying protected assets, code, or branding wholesale.
 
 ### Exploration
 Use `design-variants`. Keep experiments isolated from the primary implementation until the user selects a direction.
@@ -215,3 +215,8 @@ Do not report a design as finished until:
 - the final diff has been reviewed;
 - the user-visible result has been rendered and inspected;
 - the selected direction has been explicitly recorded when the visual choice was subjective.
+
+
+## Canonical website reconstruction rule
+
+Any website task that is driven by an existing website URL, screenshots, design files, recorded interactions, or video reference must load `website-reconstruction` before implementation. This is especially important when the task includes multiple routes, responsive fidelity, motion matching, white-labeling, asset replacement, Cloudflare/static deployment, or a request for a production-ready reusable system.

@@ -5,6 +5,11 @@ description: Recreate an interface from a reference for authorized projects, sep
 
 # Clone Reference
 
+## Canonical website-reconstruction workflow
+
+For website reconstruction, faithful website cloning, screenshot/video-driven rebuilds, or multi-route reference recreation, load `skills/design/website-reconstruction/SKILL.md` first. It is the canonical contract for route-by-route inspection, reusable architecture, asset handling, motion, white-labeling, deployment, and final validation.
+
+
 Use this skill when the user explicitly wants an interface recreated from a reference.
 
 ## First classify the reference
@@ -28,11 +33,12 @@ For public/unknown references:
 - do not redistribute scraped source assets or proprietary code
 
 ## Comparison workflow
-1. Capture a reference record.
-2. Build in an isolated local branch/worktree.
-3. Compare screenshots and interaction states at agreed viewport sizes.
-4. Record deviations explicitly.
-5. Do not promote to the main project until the user selects the target fidelity level.
+1. Load the canonical website-reconstruction workflow.
+2. Capture a reference record.
+3. Build in an isolated local branch/worktree.
+4. Compare screenshots and interaction states at agreed viewport sizes.
+5. Compare every enabled route individually and record deviations explicitly.
+6. Do not promote to the main project until the target fidelity level is recorded and validation gates pass.
 
 ## Hard rule
 "Clone exactly" means exact within the rights and authorization actually available. It does not override licensing, copyright, trademarks, privacy, or project security policies.

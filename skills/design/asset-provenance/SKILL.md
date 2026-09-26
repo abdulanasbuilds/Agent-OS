@@ -36,3 +36,8 @@ Every external asset that enters a project must have a traceable origin and a re
 
 ## Verification
 Before release, compare shipped assets against the asset register and check that their recorded license matches the actual use.
+
+
+## Website reconstruction rule
+
+For reference-driven websites, treat screenshots, scraped image URLs, remote fonts, third-party icons, video, template files, and downloaded media as reference evidence until reuse status is verified. Use project-owned, user-supplied, licensed, or otherwise permitted assets for production. The canonical workflow in `skills/design/website-reconstruction/SKILL.md` requires deterministic local asset organization, responsive metadata, controlled fallbacks, and deployment-safe URLs.

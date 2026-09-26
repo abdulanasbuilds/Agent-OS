@@ -52,3 +52,8 @@ Do not label personal taste as a defect. Distinguish objective usability/accessi
 ## References
 - https://github.com/vercel-labs/web-interface-guidelines
 - https://www.w3.org/TR/WCAG22/
+
+
+## Reconstruction review
+
+For reference-driven website work, load `skills/design/website-reconstruction/SKILL.md` and compare the implementation route-by-route against the evidence record. Verify direct-load behavior, responsive differences, interaction states, image/media behavior, motion, white-label removals, deployment correctness, and truthful integration states—not only visual similarity.
